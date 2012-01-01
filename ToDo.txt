@@ -1,5 +1,4 @@
-Logging
 JavaDoc
 JUnit
-Database Initialisierung
+Database Initialisierung mit IzPack?
 YAJSW - Yet another Java Service Wrapper
