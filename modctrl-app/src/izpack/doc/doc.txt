@@ -1,1 +1,14 @@
 We can have here some documenation files ...
+
+Help Sites of used dependencies:
+
+http://izpack.org/documentation/installation-files.html
+
+http://maven.apache.org/guides/
+
+http://www.h2database.com/html/quickstart.html
+
+http://code.google.com/intl/de-DE/webtoolkit/doc/latest/DevGuide.html
+
+http://wiki.apache.org/logging-log4j/Log4jXmlFormat
+

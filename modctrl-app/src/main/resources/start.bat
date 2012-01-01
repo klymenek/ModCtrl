@@ -1,1 +1,0 @@
-java -jar modctrl-app-0.0.1-SNAPSHOT-standard.jar

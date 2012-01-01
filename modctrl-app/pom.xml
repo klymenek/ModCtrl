@@ -3,6 +3,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
       
     <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>ModbusControl</groupId>
+        <artifactId>ModbusControl</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
   
     <groupId>modctrl-app</groupId>
     <artifactId>modctrl-app</artifactId>
@@ -28,6 +34,7 @@
             <artifactId>jetty-webapp</artifactId>
             <version>8.0.4.v20111024</version>
         </dependency>
+        <!-- Dependency for Java Service Wrapper -->
         <dependency>
             <groupId>tanukisoft</groupId>
             <artifactId>wrapper</artifactId>
@@ -47,8 +54,10 @@
         </dependency>
     </dependencies>
     
+ 
     <build>
         <plugins>
+            <!-- Konfiguration fuer Tanuki Java Service Wrapper-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
@@ -60,10 +69,27 @@
                         <initialMemorySize>256M</initialMemorySize>
                         <maxMemorySize>1024M</maxMemorySize>
                     </defaultJvmSettings>
+                    <!--
+                    <platforms>
+                        <platform>windows</platform>
+                        <platform>unix</platform>
+                    </platforms>
+                    <programs>
+                        <program>
+                            <mainClass>modbus.control.EmbeddedJettyService</mainClass>
+                            <name>ModbusControl</name>
+                             Only generate windows shell script for this application 
+                            <platforms>
+                                <platform>windows</platform>
+                            </platforms>
+                        </program>
+                    </programs> 
+                    -->
+                    
                     <daemons>
                         <daemon>
                             <id>ModbusControl</id>
-                            <mainClass>modbus.control.Service</mainClass>
+                            <mainClass>modbus.control.EmbeddedJettyService</mainClass>
                             <platforms>
                                 <platform>jsw</platform>
                             </platforms>
@@ -76,13 +102,14 @@
                                     <configuration>
                                         <property>
                                             <name>set.default.REPO_DIR</name>
-                                            <value>../../repo</value>
+                                            <value>lib</value>
                                         </property>
                                     </configuration>
                                 </generatorConfiguration>
                             </generatorConfigurations>
                         </daemon>
                     </daemons>
+                    <repoPath>jsw\ModbusControl\lib</repoPath>
                 </configuration>
                 <executions>
                     <execution>
@@ -93,6 +120,7 @@
                     </execution>
                 </executions>
             </plugin>
+            
             <!-- IzPack -->
             <!--  copy other checked resource into staging area, expected by install.xml -->
             <plugin>
@@ -101,21 +129,26 @@
                 <executions>
                     <execution>
                         <id>create-staging-area</id>
-                        <phase>process-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
+                            <!-- license file etc.. -->
                             <tasks>
                                 <copy todir="${staging.dir}">
                                     <fileset dir="${basedir}/src/izpack" />
                                 </copy>
+                                <copy todir="${staging.dir}">
+                                    <fileset dir="${basedir}/target/appassembler/jsw" />
+                                </copy>
+                                <copy file="${basedir}/../modctrl-webapp/target/modctrl-webapp-0.0.1-SNAPSHOT.war" todir="${staging.dir}/ModbusControl/lib"/>
                             </tasks>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-            <!--  prepare dependencies so that izpack jar tag to pickup at compile time -->
+            <!--  prepare dependencies so that izpack jar tag to pickup at compile time 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -129,12 +162,12 @@
                         </goals>
                         <configuration>
                             <stripVersion>true</stripVersion>
-                            <excludeGroupIds>org.codehaus.izpack</excludeGroupIds> <!-- dont want standalone compiler -->
+                            <excludeGroupIds>org.codehaus.izpack</excludeGroupIds>
                             <outputDirectory>${staging.dir}/dependency</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
 
             <!--  see install.xml to see how MyHelloPanel is used -->
             <plugin>
@@ -155,7 +188,7 @@
                 <executions>
                     <execution>
                         <id>standard-installer</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>izpack</goal>
                         </goals>

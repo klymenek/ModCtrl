@@ -29,17 +29,29 @@ public class EmbeddedJettyService implements WrapperListener {
                 }
             }
 
-            if (handler.getWar() != null && !handler.getWar().isEmpty()) {
-                // Add it to the server
-                server.setHandler(handler);
+            if (handler.getWar() == null || handler.getWar().isEmpty()) {
+                prjFolder = System.getProperty("user.dir") + "\\..\\lib";
 
-                // Other misc. options
-                server.setThreadPool(new QueuedThreadPool(20));
-
-                // And start it up
-                server.start();
-                server.join();
+                warFile = new File(prjFolder.toString());
+                listFiles = warFile.listFiles();
+                for (File file : listFiles) {
+                    if (file.isFile() && file.getName().endsWith(".war")) {
+                        handler.setWar(file.getAbsolutePath());
+                    }
+                }
             }
+
+            // Add it to the server
+            server.setHandler(handler);
+
+            // Other misc. options
+            server.setThreadPool(new QueuedThreadPool(20));
+
+            // And start it up
+            server.start();
+            server.join();
+
+            return 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

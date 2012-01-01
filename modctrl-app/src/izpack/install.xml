@@ -8,12 +8,11 @@
     -->
     <info>
         <appname>@{project.name}</appname>
-        <appversion>1.4 beta 666</appversion>
+        <appversion>0.0.1</appversion>
         <authors>
             <author name="${user.name}" email="jpz@superman.org"/>
-            <author name="Hidden Man" email="hidden@hisdomain.com"/>
         </authors>
-        <url>http://www.anotherworld-inspace-website.net/</url>
+        <url>http://localhost:8080</url>
     </info>
 
     <!-- 
@@ -53,7 +52,7 @@
         <panel classname="FinishPanel"/>
     </panels>
 
-    <jar src="dependency/plexus-utils.jar"/>
+    <!-- <jar src="dependency/plexus-utils.jar"/> -->
     <jar src="../modctrl-app-0.0.1-SNAPSHOT.jar"/>
 
     <!-- 
@@ -69,14 +68,20 @@
             <parsable targetfile="$INSTALL_PATH/script.bat"/>
             <!-- The file will be parsed -->
         </pack>
+        <pack name="ModbusControl" required="yes">
+            <description>The application files</description>
+            <file src="ModbusControl" targetdir="$INSTALL_PATH"/>
+            <executeable keep="true" failure="warn" targetfile="$INSTALL_PATH/ModbusControl/bin/ModbusControl.bat" stage="postinstall">
+                <arg>install</arg>
+            </executeable>
+            <executeable keep="false" failure="warn" targetfile="$INSTALL_PATH/ModbusControl/bin/ModbusControl.bat" stage="uninstall">
+                <arg>uninstall</arg>
+            </executeable>    
+        </pack>
         <pack name="Docs" required="no">
             <description>The documentation</description>
             <file src="doc" targetdir="$INSTALL_PATH"/>
             <!-- Reccursive adding -->
-        </pack>
-        <pack name="Sources" required="no">
-            <description>The sources</description>
-            <file src="src" targetdir="$INSTALL_PATH"/>
         </pack>
     </packs>
 
