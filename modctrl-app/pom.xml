@@ -26,5 +26,59 @@
             <artifactId>jetty-webapp</artifactId>
             <version>8.0.4.v20111024</version>
         </dependency>
+        <dependency>
+            <groupId>tanukisoft</groupId>
+            <artifactId>wrapper</artifactId>
+            <version>3.2.3</version>
+        </dependency>
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <configuration>
+                    <target>${project.build.directory}/appassembler</target>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <defaultJvmSettings>
+                        <initialMemorySize>256M</initialMemorySize>
+                        <maxMemorySize>1024M</maxMemorySize>
+                    </defaultJvmSettings>
+                    <daemons>
+                        <daemon>
+                            <id>ModbusControl</id>
+                            <mainClass>modbus.control.Service</mainClass>
+                            <platforms>
+                                <platform>jsw</platform>
+                            </platforms>
+                            <generatorConfigurations>
+                                <generatorConfiguration>
+                                    <generator>jsw</generator>
+                                    <includes>
+                                        <include>windows-x86-32</include>
+                                    </includes>
+                                    <configuration>
+                                        <property>
+                                            <name>set.default.REPO_DIR</name>
+                                            <value>../../repo</value>
+                                        </property>
+                                    </configuration>
+                                </generatorConfiguration>
+                            </generatorConfigurations>
+                        </daemon>
+                    </daemons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-daemons</goal>
+                            <goal>create-repository</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

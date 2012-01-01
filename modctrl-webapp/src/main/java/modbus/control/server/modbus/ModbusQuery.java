@@ -13,224 +13,219 @@ import net.wimpi.modbus.msg.ReadInputDiscretesResponse;
 import net.wimpi.modbus.msg.WriteCoilRequest;
 import net.wimpi.modbus.net.TCPMasterConnection;
 import net.wimpi.modbus.net.UDPMasterConnection;
+import org.apache.log4j.Logger;
 
 public class ModbusQuery {
 
-	enum PROTOCOL {
-		UDP, TCP
-	};
+    private static final Logger logger = Logger.getLogger(ModbusQuery.class);
 
-	static PROTOCOL prot = PROTOCOL.TCP; //TODO UDP moeglich???
+    enum PROTOCOL {
 
-	public synchronized static Integer writeCoil(Boolean state, ProcessVar var) {
-		switch (prot) {
-		case UDP:
-			return writeCoilUDP(state, var);
-		case TCP:
-			return writeCoilTCP(state, var);
-		default:
-			return writeCoilUDP(state, var);
-		}
-	}
+        UDP, TCP
+    };
+    static PROTOCOL prot = PROTOCOL.TCP; //TODO UDP moeglich???
 
-	public synchronized static Boolean readCoil(ProcessVar var) {
-		switch (prot) {
-		case UDP:
-			return readCoilUDP(var);
-		case TCP:
-			return readCoilTCP(var);
-		default:
-			return readCoilUDP(var);
-		}
-	}
+    public synchronized static Integer writeCoil(Boolean state, ProcessVar var) {
+        switch (prot) {
+            case UDP:
+                return writeCoilUDP(state, var);
+            case TCP:
+                return writeCoilTCP(state, var);
+            default:
+                return writeCoilUDP(state, var);
+        }
+    }
 
-	public static Integer writeCoilTCP(Boolean state, ProcessVar var) {
-		// Debugging Ausgaben aktivieren
-		System.setProperty("net.wimpi.modbus.debug", "true");
+    public synchronized static Boolean readCoil(ProcessVar var) {
+        switch (prot) {
+            case UDP:
+                return readCoilUDP(var);
+            case TCP:
+                return readCoilTCP(var);
+            default:
+                return readCoilUDP(var);
+        }
+    }
 
-		InetAddress addr = null;
-		TCPMasterConnection con = null;
-		WriteCoilRequest req = null;
-		ModbusTCPTransaction trans = null;
+    public static Integer writeCoilTCP(Boolean state, ProcessVar var) {
+        InetAddress addr = null;
+        TCPMasterConnection con = null;
+        WriteCoilRequest req = null;
+        ModbusTCPTransaction trans = null;
 
-		try {
-			// 1. Set Parameters
-			addr = InetAddress.getByName(var.getPlc().getIp());
+        try {
+            // 1. Set Parameters
+            addr = InetAddress.getByName(var.getPlc().getIp());
 
-			// 2. Open the connection
-			con = new TCPMasterConnection(addr);
-			con.setPort(var.getPlc().getPort());
-			con.connect();
+            // 2. Open the connection
+            con = new TCPMasterConnection(addr);
+            con.setPort(var.getPlc().getPort());
+            con.connect();
 
-			if (Modbus.debug) {
-				System.out.println("Connected to " + addr.toString() + ":"
-						+ con.getPort());
-			}
+            logger.debug("Connected to " + addr.toString() + ":"
+                    + con.getPort());
 
-			// 3. Prepare the requests
-			req = new WriteCoilRequest();
-			req.setReference(var.getModbusaddr());
-			req.setUnitID(0);
+            // 3. Prepare the requests
+            req = new WriteCoilRequest();
+            req.setReference(var.getModbusaddr());
+            req.setUnitID(0);
 
-			// 4. Prepare the transactions
-			trans = new ModbusTCPTransaction(con);
-			trans.setRequest(req);
-			trans.setReconnecting(false);
+            // 4. Prepare the transactions
+            trans = new ModbusTCPTransaction(con);
+            trans.setRequest(req);
+            trans.setReconnecting(false);
 
-			// 5. Execute the transaction
-			req.setCoil(state);
-			trans.execute();
+            // 5. Execute the transaction
+            req.setCoil(state);
+            trans.execute();
 
-			if (Modbus.debug) {
-				System.out.println("Updated coil with state: " + state);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			// 6. Close the connection
-			con.close();
-		}
+            logger.debug("Updated coil with state: " + state);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            // 6. Close the connection
+            con.close();
+        }
 
-		return 1;
-	}
+        return 1;
+    }
 
-	public static Boolean readCoilTCP(ProcessVar var) {
-		InetAddress addr = null;
-		TCPMasterConnection con = null;
-		ModbusRequest req = null;
+    public static Boolean readCoilTCP(ProcessVar var) {
+        InetAddress addr = null;
+        TCPMasterConnection con = null;
+        ModbusRequest req = null;
 
-		ModbusTCPTransaction trans = null;
+        ModbusTCPTransaction trans = null;
 
-		boolean in = false;
+        boolean in = false;
 
-		try {
+        try {
 
-			// 1. Setup the parameters
-			addr = InetAddress.getByName(var.getPlc().getIp());
+            // 1. Setup the parameters
+            addr = InetAddress.getByName(var.getPlc().getIp());
 
-			// 2. Open the connection
-			con = new TCPMasterConnection(addr);
-			con.setPort(var.getPlc().getPort());
-			con.connect();
-			if (Modbus.debug)
-				System.out.println("Connected to " + addr.toString() + ":"
-						+ con.getPort());
+            // 2. Open the connection
+            con = new TCPMasterConnection(addr);
+            con.setPort(var.getPlc().getPort());
+            con.connect();
+            logger.debug("Connected to " + addr.toString() + ":"
+                    + con.getPort());
 
-			// 3. Prepare the requests
-			req = new ReadInputDiscretesRequest(var.getModbusaddr(), 1);
 
-			req.setUnitID(0);
+            // 3. Prepare the requests
+            req = new ReadInputDiscretesRequest(var.getModbusaddr(), 1);
 
-			// 4. Prepare the transactions
-			trans = new ModbusTCPTransaction(con);
-			trans.setRequest(req);
-			trans.setReconnecting(false);
+            req.setUnitID(0);
 
-			// 6. Execute the transaction
-			trans.execute();
-			in = ((ReadInputDiscretesResponse) trans.getResponse())
-					.getDiscreteStatus(0);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			// 7. Close the connection
-			con.close();
-		}
+            // 4. Prepare the transactions
+            trans = new ModbusTCPTransaction(con);
+            trans.setRequest(req);
+            trans.setReconnecting(false);
 
-		return in;
-	}
+            // 6. Execute the transaction
+            trans.execute();
+            in = ((ReadInputDiscretesResponse) trans.getResponse()).getDiscreteStatus(0);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            // 7. Close the connection
+            con.close();
+        }
 
-	public static Integer writeCoilUDP(Boolean state, ProcessVar var) {
-		// Debugging Ausgaben aktivieren
-		System.setProperty("net.wimpi.modbus.debug", "true");
+        return in;
+    }
 
-		InetAddress addr = null;
-		UDPMasterConnection con = null;
-		WriteCoilRequest req = null;
-		ModbusUDPTransaction trans = null;
+    public static Integer writeCoilUDP(Boolean state, ProcessVar var) {
+        // Debugging Ausgaben aktivieren
+        System.setProperty("net.wimpi.modbus.debug", "true");
 
-		try {
-			// 1. Set Parameters
-			addr = InetAddress.getByName(var.getPlc().getIp());
+        InetAddress addr = null;
+        UDPMasterConnection con = null;
+        WriteCoilRequest req = null;
+        ModbusUDPTransaction trans = null;
 
-			// 2. Open the connection
-			con = new UDPMasterConnection(addr);
-			con.setPort(var.getPlc().getPort());
-			con.connect();
+        try {
+            // 1. Set Parameters
+            addr = InetAddress.getByName(var.getPlc().getIp());
 
-			if (Modbus.debug) {
-				System.out.println("Connected to " + addr.toString() + ":"
-						+ con.getPort());
-			}
+            // 2. Open the connection
+            con = new UDPMasterConnection(addr);
+            con.setPort(var.getPlc().getPort());
+            con.connect();
 
-			// 3. Prepare the requests
-			req = new WriteCoilRequest();
-			req.setReference(var.getModbusaddr());
-			req.setUnitID(0);
+            if (Modbus.debug) {
+                System.out.println("Connected to " + addr.toString() + ":"
+                        + con.getPort());
+            }
 
-			// 4. Prepare the transactions
-			trans = new ModbusUDPTransaction(con);
-			trans.setRequest(req);
+            // 3. Prepare the requests
+            req = new WriteCoilRequest();
+            req.setReference(var.getModbusaddr());
+            req.setUnitID(0);
 
-			// 5. Execute the transaction
-			req.setCoil(state);
-			trans.execute();
+            // 4. Prepare the transactions
+            trans = new ModbusUDPTransaction(con);
+            trans.setRequest(req);
 
-			if (Modbus.debug) {
-				System.out.println("Updated coil with state: " + state);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			// 6. Close the connection
-			con.close();
-		}
+            // 5. Execute the transaction
+            req.setCoil(state);
+            trans.execute();
 
-		return 1;
-	}
+            if (Modbus.debug) {
+                System.out.println("Updated coil with state: " + state);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            // 6. Close the connection
+            con.close();
+        }
 
-	public static Boolean readCoilUDP(ProcessVar var) {
-		InetAddress addr = null;
-		UDPMasterConnection con = null;
-		ModbusRequest req = null;
+        return 1;
+    }
 
-		ModbusUDPTransaction trans = null;
+    public static Boolean readCoilUDP(ProcessVar var) {
+        InetAddress addr = null;
+        UDPMasterConnection con = null;
+        ModbusRequest req = null;
 
-		boolean in = false;
+        ModbusUDPTransaction trans = null;
 
-		try {
+        boolean in = false;
 
-			// 1. Setup the parameters
-			addr = InetAddress.getByName(var.getPlc().getIp());
+        try {
 
-			// 2. Open the connection
-			con = new UDPMasterConnection(addr);
-			con.setPort(var.getPlc().getPort());
-			con.connect();
-			if (Modbus.debug)
-				System.out.println("Connected to " + addr.toString() + ":"
-						+ con.getPort());
+            // 1. Setup the parameters
+            addr = InetAddress.getByName(var.getPlc().getIp());
 
-			// 3. Prepare the requests
-			req = new ReadInputDiscretesRequest(var.getModbusaddr(), 1);
+            // 2. Open the connection
+            con = new UDPMasterConnection(addr);
+            con.setPort(var.getPlc().getPort());
+            con.connect();
+            if (Modbus.debug) {
+                System.out.println("Connected to " + addr.toString() + ":"
+                        + con.getPort());
+            }
 
-			req.setUnitID(0);
+            // 3. Prepare the requests
+            req = new ReadInputDiscretesRequest(var.getModbusaddr(), 1);
 
-			// 4. Prepare the transactions
-			trans = new ModbusUDPTransaction(con);
-			trans.setRequest(req);
+            req.setUnitID(0);
 
-			// 6. Execute the transaction
-			trans.execute();
-			in = ((ReadInputDiscretesResponse) trans.getResponse())
-					.getDiscreteStatus(0);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			// 7. Close the connection
-			con.close();
-		}
+            // 4. Prepare the transactions
+            trans = new ModbusUDPTransaction(con);
+            trans.setRequest(req);
 
-		return in;
-	}
+            // 6. Execute the transaction
+            trans.execute();
+            in = ((ReadInputDiscretesResponse) trans.getResponse()).getDiscreteStatus(0);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            // 7. Close the connection
+            con.close();
+        }
+
+        return in;
+    }
 }
