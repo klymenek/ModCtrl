@@ -25,6 +25,21 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.rzo</groupId>
+            <artifactId>yajsw</artifactId>
+            <version>beta-10.12</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wrapper.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.rzo</groupId>
+            <artifactId>yajswApp</artifactId>
+            <version>beta-10.12</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wrapperApp.jar</systemPath>
+        </dependency>
+        
+        <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
             <version>8.0.4.v20111024</version>
