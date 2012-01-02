@@ -10,6 +10,8 @@ import modbus.control.shared.ProcessVar;
  */
 @RemoteServiceRelativePath("plc")
 public interface PLCService extends RemoteService {
-	Integer writeCoil(Boolean state, ProcessVar var);
-	Boolean readCoil(ProcessVar var);
+
+    Integer writeCoil(Boolean state, ProcessVar var);
+
+    Boolean readCoil(ProcessVar var);
 }

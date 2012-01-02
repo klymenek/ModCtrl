@@ -98,7 +98,7 @@
                     <target>1.6</target>
                     <sources>
                         <source>
-                            <!-- <basedir>src/main/java</basedir> -->
+                            <basedir>src/main/java</basedir>
                             <includes>
                                 <include>modbus/control/logging/AutoTrace.aj</include>
                                 <include>modbus/control/server/*</include>

@@ -17,27 +17,25 @@ import modbus.control.shared.Category;
  */
 @SuppressWarnings("serial")
 public class DatabaseServiceImpl extends RemoteServiceServlet implements
-		DatabaseService {
+        DatabaseService {
 
-	@Override
-	public List<Category> getCategorys() {
-		try {
-			return JDBCQuery.getCategory((Connection) getServletContext()
-					.getAttribute("connection"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+    @Override
+    public List<Category> getCategorys() {
+        try {
+            return JDBCQuery.getCategory((Connection) getServletContext().getAttribute("connection"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-	@Override
-	public List<ProcessVar> getVarsByCategory(Category category) {
-		try {
-			return JDBCQuery.getVars(category, (Connection) getServletContext()
-					.getAttribute("connection"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+    @Override
+    public List<ProcessVar> getVarsByCategory(Category category) {
+        try {
+            return JDBCQuery.getVars(category, (Connection) getServletContext().getAttribute("connection"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

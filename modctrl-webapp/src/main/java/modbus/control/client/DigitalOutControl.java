@@ -19,86 +19,88 @@ import modbus.control.shared.ProcessVar;
  */
 public class DigitalOutControl extends VerticalPanel {
 
-	final PLCServiceAsync plc;
-	final ProcessVar var;
-	// UI Elements
-	final OutputButton output;
-	final Label description;
+    final PLCServiceAsync plc;
+    final ProcessVar var;
+    // UI Elements
+    final OutputButton output;
+    final Label description;
 
-	class OutputButton extends ToggleButton {
-		ProcessVar var;
+    class OutputButton extends ToggleButton {
 
-		public OutputButton(String upText) {
-			super(upText);
-		}
+        ProcessVar var;
 
-		public ProcessVar getVar() {
-			return var;
-		}
+        public OutputButton(String upText) {
+            super(upText);
+        }
 
-		public void setVar(ProcessVar v) {
-			this.var = v;
-		}
-	}
+        public ProcessVar getVar() {
+            return var;
+        }
 
-	public DigitalOutControl(PLCServiceAsync p, ProcessVar v) {
-		super();
-		this.plc = p;
-		this.var = v;
+        public void setVar(ProcessVar v) {
+            this.var = v;
+        }
+    }
 
-		output = new OutputButton(var.getDescription());
-		output.setVar(var);
+    public DigitalOutControl(PLCServiceAsync p, ProcessVar v) {
+        super();
+        this.plc = p;
+        this.var = v;
 
-		plc.readCoil(var, new AsyncCallback<Boolean>() {
+        output = new OutputButton(var.getDescription());
+        output.setVar(var);
 
-			@Override
-			public void onFailure(Throwable caught) {
-				ModbusControl.showErrorPanel(ModbusControl.RPC_ERROR_TITLE,
-						ModbusControl.SERVER_ERROR);
+        plc.readCoil(var, new AsyncCallback<Boolean>() {
 
-			}
+            @Override
+            public void onFailure(Throwable caught) {
+                ModbusControl.showErrorPanel(ModbusControl.RPC_ERROR_TITLE,
+                        ModbusControl.SERVER_ERROR);
 
-			@Override
-			public void onSuccess(Boolean result) {
-				output.setValue(result);
-			}
-		});
+            }
 
-		description = new Label(var.getDescription());
+            @Override
+            public void onSuccess(Boolean result) {
+                output.setValue(result);
+            }
+        });
 
-		addStyleName("dialogVPanel");
+        description = new Label(var.getDescription());
 
-		// add(new HTML("<b></b>"));
-		//add(description);
-		setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-		add(output);
+        addStyleName("dialogVPanel");
 
-		class ModbusHandler implements ValueChangeHandler<Boolean> {
+        // add(new HTML("<b></b>"));
+        //add(description);
+        setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+        add(output);
 
-			@Override
-			public void onValueChange(ValueChangeEvent<Boolean> event) {
-				OutputButton outputButton = (OutputButton) event.getSource();
+        class ModbusHandler implements ValueChangeHandler<Boolean> {
 
-				plc.writeCoil(event.getValue(), outputButton.getVar(),
-						new AsyncCallback<Integer>() {
-							public void onFailure(Throwable caught) {
-								ModbusControl.showErrorPanel(
-										ModbusControl.RPC_ERROR_TITLE,
-										ModbusControl.SERVER_ERROR);
-							}
+            @Override
+            public void onValueChange(ValueChangeEvent<Boolean> event) {
+                OutputButton outputButton = (OutputButton) event.getSource();
 
-							public void onSuccess(Integer result) {
-								if (result != 1) {
-									ModbusControl.showErrorPanel(
-											ModbusControl.MODBUS_ERROR_TITLE,
-											ModbusControl.MODBUS_ERROR_001);
-								}
-							}
-						});
-			}
-		}
+                plc.writeCoil(event.getValue(), outputButton.getVar(),
+                        new AsyncCallback<Integer>() {
 
-		ModbusHandler wagoHandler = new ModbusHandler();
-		output.addValueChangeHandler(wagoHandler);
-	}
+                            public void onFailure(Throwable caught) {
+                                ModbusControl.showErrorPanel(
+                                        ModbusControl.RPC_ERROR_TITLE,
+                                        ModbusControl.SERVER_ERROR);
+                            }
+
+                            public void onSuccess(Integer result) {
+                                if (result != 1) {
+                                    ModbusControl.showErrorPanel(
+                                            ModbusControl.MODBUS_ERROR_TITLE,
+                                            ModbusControl.MODBUS_ERROR_001);
+                                }
+                            }
+                        });
+            }
+        }
+
+        ModbusHandler wagoHandler = new ModbusHandler();
+        output.addValueChangeHandler(wagoHandler);
+    }
 }

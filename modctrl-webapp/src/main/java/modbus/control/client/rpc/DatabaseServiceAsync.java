@@ -11,6 +11,8 @@ import modbus.control.shared.Category;
  * The async counterpart of <code>DIDOService</code>.
  */
 public interface DatabaseServiceAsync {
-	void getCategorys(AsyncCallback<List<Category>> callback);
-	void getVarsByCategory(Category category, AsyncCallback<List<ProcessVar>> callback);
+
+    void getCategorys(AsyncCallback<List<Category>> callback);
+
+    void getVarsByCategory(Category category, AsyncCallback<List<ProcessVar>> callback);
 }

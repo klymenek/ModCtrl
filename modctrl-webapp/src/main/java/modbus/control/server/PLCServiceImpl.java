@@ -7,25 +7,25 @@ import modbus.control.server.modbus.ModbusQuery;
 import modbus.control.shared.ProcessVar;
 
 /**
- *  TODO splitten in TCP, UDP, etc.
+ * 
  * @author ares
  */
 @SuppressWarnings("serial")
 public class PLCServiceImpl extends RemoteServiceServlet implements
-		PLCService {
+        PLCService {
 
-	/**
-	 * @param args
-	 *            - the command line arguments
-	 */
-	public Integer writeCoil(Boolean state, ProcessVar var) {
+    /**
+     * @param args
+     *            - the command line arguments
+     */
+    public Integer writeCoil(Boolean state, ProcessVar var) {
 
-		return ModbusQuery.writeCoil(state, var);
-	}// main
+        return ModbusQuery.writeCoil(state, var);
+    }// main
 
-	@Override
-	public Boolean readCoil(ProcessVar var) {
-		
-		return ModbusQuery.readCoil(var);
-	}
+    @Override
+    public Boolean readCoil(ProcessVar var) {
+
+        return ModbusQuery.readCoil(var);
+    }
 }

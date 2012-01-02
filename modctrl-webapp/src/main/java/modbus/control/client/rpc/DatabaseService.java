@@ -13,6 +13,8 @@ import modbus.control.shared.Category;
  */
 @RemoteServiceRelativePath("database")
 public interface DatabaseService extends RemoteService {
-	List<Category> getCategorys();
-	List<ProcessVar> getVarsByCategory(Category category);
+
+    List<Category> getCategorys();
+
+    List<ProcessVar> getVarsByCategory(Category category);
 }
