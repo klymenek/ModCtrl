@@ -5,8 +5,8 @@ import java.util.ListIterator;
 
 import org.apache.commons.cli2.validation.FileValidator;
 import org.apache.commons.cli2.validation.InvalidArgumentException;
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileType;
+import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileType;
 
 public class VFSFileValidator extends FileValidator
 {

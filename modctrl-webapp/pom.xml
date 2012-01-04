@@ -49,8 +49,8 @@
             <artifactId>log4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>net.wimpi.modbus</groupId>
-            <artifactId>jamod</artifactId>
+            <groupId>repository.net.wimpi.modbus</groupId>
+            <artifactId>jamodTcp</artifactId>
             <version>1.2-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -1,7 +1,7 @@
 package org.rzo.yajsw.os.ms.win.w32;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.vfs.FileSystemException;
+import org.apache.commons.vfs2.FileSystemException;
 import org.jboss.netty.logging.InternalLogger;
 import org.jboss.netty.logging.InternalLoggerFactory;
 import org.rzo.yajsw.script.Script;

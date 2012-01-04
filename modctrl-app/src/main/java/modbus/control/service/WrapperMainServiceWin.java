@@ -11,8 +11,6 @@
 package modbus.control.service;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -57,13 +55,13 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
      *            the arguments
      */
     public static void main(String[] args) {
-        System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty"); // system properties overwrite properties in conf file.      
+        System.setProperty("wrapper.config", System.getProperty("user.dir") + "\\src\\main\\resources\\wrapper.conf");
         
         String wrapperJar = WrapperLoader.getWrapperJar();
         // set home dir of the service to the wrapper jar parent, so that we may find required libs
         String homeDir = new File(wrapperJar).getParent();
-        OperatingSystem.instance().setWorkingDir(homeDir);
-        YajswConfigurationImpl _config = new YajswConfigurationImpl(false);
+        OperatingSystem.instance().setWorkingDir(System.getProperty("user.dir") + "\\target\\dependency");
+        YajswConfigurationImpl _config = new YajswConfigurationImpl(true);
         
         service = new WrapperMainServiceWin();
         // set service shutdown timeout
@@ -95,6 +93,8 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
         // global configuration
 
         WrappedProcess wp = WrappedProcessFactory.createProcess((YajswConfiguration)_config);
+        
+        
         // set service in wrapper so that we may stop the service in case the application terminates and we need to shutdown the wrapper
         wp.setService(service);
         wp.init();

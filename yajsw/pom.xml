@@ -104,11 +104,6 @@
             <classifier>platform</classifier>
         </dependency>
         <dependency>
-            <groupId>commons-vfs</groupId>
-            <artifactId>commons-vfs</artifactId>
-            <version>20050307052300</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.6.4</version>
@@ -122,6 +117,11 @@
             <groupId>com.jgoodies</groupId>
             <artifactId>forms</artifactId>
             <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-vfs2</artifactId>
+            <version>2.0</version>
         </dependency>
     </dependencies>
 

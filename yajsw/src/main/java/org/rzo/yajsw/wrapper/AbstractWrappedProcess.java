@@ -282,7 +282,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess, Constant
 		// a tray proxy for displaying messages
 		if (_config.getBoolean("wrapper.tray", false))
 		{
-			startAhessianService();
+			//startAhessianService();
 			_trayIconMessages = new TrayIconProxy();
 		}
 

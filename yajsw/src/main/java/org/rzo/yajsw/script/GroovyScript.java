@@ -25,8 +25,8 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.vfs.FileName;
-import org.apache.commons.vfs.FileObject;
+import org.apache.commons.vfs2.FileName;
+import org.apache.commons.vfs2.FileObject;
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.jboss.netty.logging.InternalLogger;
 import org.rzo.yajsw.boot.WrapperLoader;
