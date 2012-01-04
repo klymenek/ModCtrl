@@ -40,6 +40,8 @@
     </dependencyManagement>
     
     <modules>
+        <module>jamod</module>
+        <module>yajsw</module>
         <module>modctrl-webapp</module>
         <module>modctrl-app</module>
     </modules>
