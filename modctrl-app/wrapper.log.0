@@ -1,0 +1,16 @@
+INFO|wrapper|yajsw|12-01-04 19:55:44|init 
+INFO|wrapper|yajsw|12-01-04 19:55:44|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-04 19:55:44|starting Process
+INFO|wrapper|yajsw|12-01-04 19:55:44|Win service: before service init
+INFO|wrapper|yajsw|12-01-04 19:55:44|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-04 19:55:44|87:Falscher Parameter.
+INFO|wrapper|yajsw|12-01-04 19:55:44|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-04 19:55:44|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-04 21:09:44|init 
+INFO|wrapper|yajsw|12-01-04 21:09:44|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-04 21:09:44|Win service: before service init
+INFO|wrapper|yajsw|12-01-04 21:09:44|starting Process
+INFO|wrapper|yajsw|12-01-04 21:09:44|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-04 21:09:44|87:Falscher Parameter.
+INFO|wrapper|yajsw|12-01-04 21:09:44|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-04 21:09:44|Controller State: UNKNOWN -> WAITING

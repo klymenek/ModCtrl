@@ -11,6 +11,11 @@
 package modbus.control.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -18,9 +23,8 @@ import java.util.concurrent.TimeUnit;
 
 import jnacontrib.win32.Win32Service;
 
+import org.apache.log4j.Logger;
 import org.rzo.yajsw.boot.WrapperLoader;
-import org.rzo.yajsw.config.YajswConfiguration;
-import org.rzo.yajsw.config.YajswConfigurationImpl;
 import org.rzo.yajsw.os.OperatingSystem;
 import org.rzo.yajsw.os.StopableService;
 import org.rzo.yajsw.wrapper.WrappedProcess;
@@ -40,6 +44,7 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
     /** The service. */
     static WrapperMainServiceWin service;
     static ExecutorService pool = Executors.newFixedThreadPool(5);
+    private static final Logger logger = Logger.getLogger(WrapperMainServiceWin.class);
 
     /**
      * Instantiates a new wrapper main service.
@@ -56,16 +61,23 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
      */
     public static void main(String[] args) {
         System.setProperty("wrapper.config", System.getProperty("user.dir") + "\\src\\main\\resources\\wrapper.conf");
-        
+        System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty"); // system properties overwrite properties in conf file.
+        System.setProperty("wrapper.tray", "false");
+
         String wrapperJar = WrapperLoader.getWrapperJar();
         // set home dir of the service to the wrapper jar parent, so that we may find required libs
         String homeDir = new File(wrapperJar).getParent();
-        OperatingSystem.instance().setWorkingDir(System.getProperty("user.dir") + "\\target\\dependency");
-        YajswConfigurationImpl _config = new YajswConfigurationImpl(true);
-        
+        OperatingSystem.instance().setWorkingDir(System.getProperty("user.dir"));
+
         service = new WrapperMainServiceWin();
+
+
+        if (false) {
+            service.install("Modbus Control", "control modbus PLC", null, "ares", "Jas1MinB", true);
+            return;
+        }
+
         // set service shutdown timeout
-        service.setServiceName(_config.getString("wrapper.ntservice.name"));
 //		int timeout = _config.getInt("wrapper.shutdown.timeout", Constants.DEFAULT_SHUTDOWN_TIMEOUT) * 1000;
 //		timeout += _config.getInt("wrapper.script.STOP.timeout", 0) * 1000;
 //		timeout += _config.getInt("wrapper.script.SHUTDOWN.timeout", 0) * 1000;
@@ -75,26 +87,11 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
 //		
 //		timeout = _config.getInt("wrapper.startup.timeout", Constants.DEFAULT_STARTUP_TIMEOUT) * 1000;
         service.setStartupTimeout(3000);
-//		
-//		service.setAutoReportStartup(_config.getBoolean("wrapper.ntservice.autoreport.startup", true));
-//		
-//		if (_config.containsKey("wrapperx.config"))
-//		{
-//			List<String> configs = _config.getList("wrapperx.config");
-//			wList = WrappedProcessFactory.createProcessList(new HashMap(), configs, true);
-//			for (WrappedProcess p : wList)
-//			{
-//				p.setService(service);
-//			}
-//		}
-//		else
-//		{
 
-        // global configuration
+        Map configuration = new HashMap();
+        WrappedProcess wp = (WrappedProcess) WrappedProcessFactory.createProcess(configuration, true);
 
-        WrappedProcess wp = WrappedProcessFactory.createProcess((YajswConfiguration)_config);
-        
-        
+
         // set service in wrapper so that we may stop the service in case the application terminates and we need to shutdown the wrapper
         wp.setService(service);
         wp.init();
@@ -146,6 +143,29 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
         // service has terminated -> halt the wrapper jvm
         wp.getWrapperLogger().info("Win service: terminated correctly");
         Runtime.getRuntime().halt(0);
+    }
+
+    @Override
+    public boolean install(String displayName, String description, String[] dependencies, String account, String password, boolean delayedAutostart) {
+        File prjFolder = new File(System.getProperty("user.dir") + "\\target\\dependency");
+        if (!prjFolder.exists()) {
+            prjFolder = new File(System.getProperty("user.dir") + "\\..\\lib");
+            if (!prjFolder.exists()) {
+                logger.error("NO LIBRARYS FOUND");
+                return false;
+            }
+        }
+
+        List<String> depFiles = new ArrayList<String>();
+        for (File dependencyFile : prjFolder.listFiles()) {
+
+            if (dependencyFile.isFile() && dependencyFile.getName().endsWith("jar")) {
+                depFiles.add(dependencyFile.getAbsolutePath());
+            }
+        }
+        dependencies = depFiles.toArray(new String[0]);
+
+        return super.install(displayName, description, dependencies, account, password, delayedAutostart);
     }
 
     /*
