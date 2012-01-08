@@ -1392,9 +1392,9 @@ public class WrapperManagerImpl implements WrapperManager, Constants, WrapperMan
 					if (!parent.exists())
 						parent.mkdirs();
 
-					com.sun.management.HotSpotDiagnosticMXBean mb = sun.management.ManagementFactory.getDiagnosticMXBean();
+					//com.sun.management.HotSpotDiagnosticMXBean mb = sun.management.ManagementFactory.getDiagnosticMXBean();
 					File dumpFile = new File(parent, file.getName());
-					mb.dumpHeap(dumpFile.getAbsolutePath(), true);
+					//mb.dumpHeap(dumpFile.getAbsolutePath(), true);
 					System.out.println("yajsw: dumpHeap done " + dumpFile.getAbsolutePath());
 				}
 				catch (Throwable ex)

@@ -14,3 +14,95 @@ INFO|wrapper|yajsw|12-01-04 21:09:44|error in StartServiceCtrlDispatcher
 INFO|wrapper|yajsw|12-01-04 21:09:44|87:Falscher Parameter.
 INFO|wrapper|yajsw|12-01-04 21:09:44|Win service: terminated correctly
 INFO|wrapper|yajsw|12-01-04 21:09:44|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-05 00:28:22|init 
+INFO|wrapper|yajsw|12-01-05 00:28:22|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-05 00:28:22|starting Process
+INFO|wrapper|yajsw|12-01-05 00:28:22|Win service: before service init
+INFO|wrapper|yajsw|12-01-05 00:28:22|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-05 00:28:22|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-05 00:28:22|87:Falscher Parameter.
+INFO|wrapper|yajsw|12-01-05 00:28:22|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 01:23:06|init 
+INFO|wrapper|yajsw|12-01-08 01:23:06|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 01:23:06|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 01:23:06|starting Process
+INFO|wrapper|yajsw|12-01-08 01:23:06|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 01:23:06|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 01:23:06|87:Falscher Parameter.
+INFO|wrapper|yajsw|12-01-08 01:23:06|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 02:15:10|init 
+INFO|wrapper|yajsw|12-01-08 02:15:10|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 02:15:10|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 02:15:10|starting Process
+INFO|wrapper|yajsw|12-01-08 02:15:10|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 02:15:11|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 02:15:11|87:Falscher Parameter.
+INFO|wrapper|yajsw|12-01-08 02:15:11|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 02:15:30|init 
+INFO|wrapper|yajsw|12-01-08 02:15:30|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 02:15:30|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 02:15:30|starting Process
+INFO|wrapper|yajsw|12-01-08 02:15:30|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 02:15:30|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 02:15:30|87:Falscher Parameter.
+INFO|wrapper|yajsw|12-01-08 02:15:30|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 02:19:43|init 
+INFO|wrapper|yajsw|12-01-08 02:19:43|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 02:19:43|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 02:19:43|starting Process
+INFO|wrapper|yajsw|12-01-08 02:19:43|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 02:19:43|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 02:19:43|1063:Der Dienstprozess konnte keine Verbindung mit dem Dienstcontroller herstellen.
+INFO|wrapper|yajsw|12-01-08 02:19:43|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 02:20:11|init 
+INFO|wrapper|yajsw|12-01-08 02:20:11|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 02:20:11|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 02:20:11|starting Process
+INFO|wrapper|yajsw|12-01-08 02:20:11|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 02:20:11|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 02:20:11|1063:Der Dienstprozess konnte keine Verbindung mit dem Dienstcontroller herstellen.
+INFO|wrapper|yajsw|12-01-08 02:20:11|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 02:21:01|init 
+INFO|wrapper|yajsw|12-01-08 02:21:01|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 02:21:01|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 02:21:01|starting Process
+INFO|wrapper|yajsw|12-01-08 02:21:01|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 02:21:01|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 02:21:01|1063:Der Dienstprozess konnte keine Verbindung mit dem Dienstcontroller herstellen.
+INFO|wrapper|yajsw|12-01-08 02:21:01|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 11:34:53|init 
+INFO|wrapper|yajsw|12-01-08 11:34:54|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 11:34:54|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 11:34:54|starting Process
+INFO|wrapper|yajsw|12-01-08 11:34:54|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 11:34:54|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 11:34:54|1063:Der Dienstprozess konnte keine Verbindung mit dem Dienstcontroller herstellen.
+INFO|wrapper|yajsw|12-01-08 11:34:54|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 11:38:21|init 
+INFO|wrapper|yajsw|12-01-08 11:38:21|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 11:38:21|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 11:38:21|starting Process
+INFO|wrapper|yajsw|12-01-08 11:38:21|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 11:38:21|1063:Der Dienstprozess konnte keine Verbindung mit dem Dienstcontroller herstellen.
+INFO|wrapper|yajsw|12-01-08 11:38:21|Controller State: UNKNOWN -> WAITING
+INFO|wrapper|yajsw|12-01-08 11:38:21|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 22:17:02|init 
+INFO|wrapper|yajsw|12-01-08 22:17:02|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 22:17:02|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 22:17:02|1056:Es wird bereits eine Instanz des Dienstes ausgeführt.
+INFO|wrapper|yajsw|12-01-08 22:17:02|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 22:17:02|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 22:17:20|init 
+INFO|wrapper|yajsw|12-01-08 22:17:20|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 22:17:20|starting Process
+INFO|wrapper|yajsw|12-01-08 22:17:20|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 22:17:20|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 22:17:20|1056:Es wird bereits eine Instanz des Dienstes ausgeführt.
+INFO|wrapper|yajsw|12-01-08 22:17:20|Win service: terminated correctly
+INFO|wrapper|yajsw|12-01-08 23:18:04|init 
+INFO|wrapper|yajsw|12-01-08 23:18:04|set state IDLE->STARTING
+INFO|wrapper|yajsw|12-01-08 23:18:04|starting Process
+INFO|wrapper|yajsw|12-01-08 23:18:04|Win service: before service init
+INFO|wrapper|yajsw|12-01-08 23:18:04|error in StartServiceCtrlDispatcher
+INFO|wrapper|yajsw|12-01-08 23:18:04|1063:Der Dienstprozess konnte keine Verbindung mit dem Dienstcontroller herstellen.
+INFO|wrapper|yajsw|12-01-08 23:18:04|Win service: terminated correctly

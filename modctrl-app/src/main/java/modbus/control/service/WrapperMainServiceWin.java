@@ -12,7 +12,6 @@ package modbus.control.service;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
 import jnacontrib.win32.Win32Service;
-
 import org.apache.log4j.Logger;
 import org.rzo.yajsw.boot.WrapperLoader;
 import org.rzo.yajsw.os.OperatingSystem;
@@ -66,14 +63,19 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
 
         String wrapperJar = WrapperLoader.getWrapperJar();
         // set home dir of the service to the wrapper jar parent, so that we may find required libs
-        String homeDir = new File(wrapperJar).getParent();
         OperatingSystem.instance().setWorkingDir(System.getProperty("user.dir"));
 
         service = new WrapperMainServiceWin();
-
+        service.setServiceName("modctrl"); 
+        
+        //service.init();
 
         if (false) {
-            service.install("Modbus Control", "control modbus PLC", null, "ares", "Jas1MinB", true);
+            service.install("Modbus Control", "control modbus PLC", null, "OKEANOS\\ares", "Jas1MinB", true);
+//            service.start();
+            
+//            service.init();
+//            service.uninstall();
             return;
         }
 
@@ -147,23 +149,23 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
 
     @Override
     public boolean install(String displayName, String description, String[] dependencies, String account, String password, boolean delayedAutostart) {
-        File prjFolder = new File(System.getProperty("user.dir") + "\\target\\dependency");
-        if (!prjFolder.exists()) {
-            prjFolder = new File(System.getProperty("user.dir") + "\\..\\lib");
-            if (!prjFolder.exists()) {
-                logger.error("NO LIBRARYS FOUND");
-                return false;
-            }
-        }
-
-        List<String> depFiles = new ArrayList<String>();
-        for (File dependencyFile : prjFolder.listFiles()) {
-
-            if (dependencyFile.isFile() && dependencyFile.getName().endsWith("jar")) {
-                depFiles.add(dependencyFile.getAbsolutePath());
-            }
-        }
-        dependencies = depFiles.toArray(new String[0]);
+//        File prjFolder = new File(System.getProperty("user.dir") + "\\target\\dependency");
+//        if (!prjFolder.exists()) {
+//            prjFolder = new File(System.getProperty("user.dir") + "\\..\\lib");
+//            if (!prjFolder.exists()) {
+//                logger.error("NO LIBRARYS FOUND");
+//                return false;
+//            }
+//        }
+//
+//        List<String> depFiles = new ArrayList<String>();
+//        for (File dependencyFile : prjFolder.listFiles()) {
+//
+//            if (dependencyFile.isFile() && dependencyFile.getName().endsWith("jar")) {
+//                depFiles.add(dependencyFile.getAbsolutePath());
+//            }
+//        }
+//        dependencies = depFiles.toArray(new String[0]);
 
         return super.install(displayName, description, dependencies, account, password, delayedAutostart);
     }
