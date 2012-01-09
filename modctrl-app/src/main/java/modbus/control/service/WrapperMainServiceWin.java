@@ -60,10 +60,12 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
         System.setProperty("wrapper.config", System.getProperty("user.dir") + "\\src\\main\\resources\\wrapper.conf");
         System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty"); // system properties overwrite properties in conf file.
         System.setProperty("wrapper.tray", "false");
+        System.setProperty("wrapper.working.dir", "");
 
         String wrapperJar = WrapperLoader.getWrapperJar();
         // set home dir of the service to the wrapper jar parent, so that we may find required libs
         OperatingSystem.instance().setWorkingDir(System.getProperty("user.dir"));
+        
 
         service = new WrapperMainServiceWin();
         service.setServiceName("modctrl"); 
@@ -71,7 +73,7 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
         //service.init();
 
         if (false) {
-            service.install("Modbus Control", "control modbus PLC", null, "OKEANOS\\ares", "Jas1MinB", true);
+            service.install("Modbus Control", "control modbus PLC", null, "NT-AUTORITÄT\\System", "", true);
 //            service.start();
             
 //            service.init();
@@ -92,7 +94,6 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
 
         Map configuration = new HashMap();
         WrappedProcess wp = (WrappedProcess) WrappedProcessFactory.createProcess(configuration, true);
-
 
         // set service in wrapper so that we may stop the service in case the application terminates and we need to shutdown the wrapper
         wp.setService(service);

@@ -10,6 +10,8 @@ public class EmbeddedJetty {
     public static void main(String[] args) {
         
         try {
+            System.out.println("JUHU START EMBEDDEDJETTY");
+            
             // Create an embedded Jetty server on port 8080
             Server server = new Server(8080);
 
