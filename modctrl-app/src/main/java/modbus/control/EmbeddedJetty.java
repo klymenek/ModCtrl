@@ -10,8 +10,6 @@ public class EmbeddedJetty {
     public static void main(String[] args) {
         
         try {
-            System.out.println("JUHU START EMBEDDEDJETTY");
-            
             // Create an embedded Jetty server on port 8080
             Server server = new Server(8080);
 
@@ -19,8 +17,9 @@ public class EmbeddedJetty {
             WebAppContext handler = new WebAppContext();
             handler.setContextPath("/");
 
-            String prjFolder = System.getProperty("user.dir") + "\\..\\modctrl-webapp\\target";
-
+            //String prjFolder = System.getProperty("user.dir") + "\\..\\modctrl-webapp\\target";
+            String prjFolder = "D:\\dev\\ModbusControl\\modctrl-webapp\\target";     
+            
             File warFile = new File(prjFolder.toString());
             File[] listFiles = warFile.listFiles();
             for (File file : listFiles) {
