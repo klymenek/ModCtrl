@@ -1,18 +1,16 @@
 package modbus.control.client.rpc;
 
-import java.util.List;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import modbus.control.shared.ProcessVar;
-import modbus.control.shared.Category;
+import java.util.List;
+import modbus.control.shared.CategoryJso;
+import modbus.control.shared.ProcessVarJso;
 
 /**
  * The async counterpart of <code>DIDOService</code>.
  */
 public interface DatabaseServiceAsync {
 
-    void getCategorys(AsyncCallback<List<Category>> callback);
+    void getCategory(AsyncCallback<List<CategoryJso>> callback);
 
-    void getVarsByCategory(Category category, AsyncCallback<List<ProcessVar>> callback);
+    void getVarsByCategory(CategoryJso category, AsyncCallback<List<ProcessVarJso>> callback);
 }

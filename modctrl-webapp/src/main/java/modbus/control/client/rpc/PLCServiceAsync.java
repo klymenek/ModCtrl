@@ -1,15 +1,14 @@
 package modbus.control.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
-import modbus.control.shared.ProcessVar;
+import modbus.control.shared.ProcessVarJso;
 
 /**
  * The async counterpart of <code>DIDOService</code>.
  */
 public interface PLCServiceAsync {
 
-    void writeCoil(Boolean state, ProcessVar var, AsyncCallback<Integer> callback);
+    void writeCoil(Boolean state, ProcessVarJso var, AsyncCallback<Integer> callback);
 
-    void readCoil(ProcessVar var, AsyncCallback<Boolean> callback);
+    void readCoil(ProcessVarJso var, AsyncCallback<Boolean> callback);
 }

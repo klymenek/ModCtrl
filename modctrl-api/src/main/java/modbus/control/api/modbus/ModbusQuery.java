@@ -1,9 +1,7 @@
-package modbus.control.server.modbus;
+package modbus.control.api.modbus;
 
 import java.net.InetAddress;
-
-import modbus.control.shared.ProcessVar;
-
+import modbus.control.api.model.ProcessVar;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.io.ModbusTCPTransaction;
 import net.wimpi.modbus.io.ModbusUDPTransaction;

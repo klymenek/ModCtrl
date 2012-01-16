@@ -6,9 +6,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
 import modbus.control.client.rpc.PLCServiceAsync;
-import modbus.control.shared.ProcessVar;
+import modbus.control.shared.ProcessVarJso;
 
 /**
  * TODO aktualisieren der Ausgaenge vom Server aus!
@@ -20,29 +19,29 @@ import modbus.control.shared.ProcessVar;
 public class DigitalOutControl extends VerticalPanel {
 
     final PLCServiceAsync plc;
-    final ProcessVar var;
+    final ProcessVarJso var;
     // UI Elements
     final OutputButton output;
     final Label description;
 
     class OutputButton extends ToggleButton {
 
-        ProcessVar var;
+        ProcessVarJso var;
 
         public OutputButton(String upText) {
             super(upText);
         }
 
-        public ProcessVar getVar() {
+        public ProcessVarJso getVar() {
             return var;
         }
 
-        public void setVar(ProcessVar v) {
+        public void setVar(ProcessVarJso v) {
             this.var = v;
         }
     }
 
-    public DigitalOutControl(PLCServiceAsync p, ProcessVar v) {
+    public DigitalOutControl(PLCServiceAsync p, ProcessVarJso v) {
         super();
         this.plc = p;
         this.var = v;
@@ -83,12 +82,14 @@ public class DigitalOutControl extends VerticalPanel {
                 plc.writeCoil(event.getValue(), outputButton.getVar(),
                         new AsyncCallback<Integer>() {
 
+                    @Override
                             public void onFailure(Throwable caught) {
                                 ModbusControl.showErrorPanel(
                                         ModbusControl.RPC_ERROR_TITLE,
                                         ModbusControl.SERVER_ERROR);
                             }
 
+                    @Override
                             public void onSuccess(Integer result) {
                                 if (result != 1) {
                                     ModbusControl.showErrorPanel(

@@ -1,6 +1,8 @@
 package modbus.control.shared;
 
-public class PLC implements java.io.Serializable {
+import modbus.control.api.model.PLC;
+
+public class PLCJso implements PLC, java.io.Serializable {
 
     private static final long serialVersionUID = -612132013583310346L;
     int id;
@@ -8,34 +10,42 @@ public class PLC implements java.io.Serializable {
     String ip;
     int port;
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getIp() {
         return ip;
     }
 
+    @Override
     public void setIp(String ip) {
         this.ip = ip;
     }
 
+    @Override
     public int getPort() {
         return port;
     }
 
+    @Override
     public void setPort(int port) {
         this.port = port;
     }

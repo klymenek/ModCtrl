@@ -58,12 +58,6 @@
             <artifactId>yajsw</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        
-        
-        
-        
-        
-        
         <!-- yajsw deps -->
         <dependency>
             <groupId>jetaforms</groupId>
@@ -161,77 +155,12 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.15</version>
         </dependency>
     </dependencies>
     
  
     <build>
-        <plugins>
-            <!-- Konfiguration fuer Tanuki Java Service Wrapper-->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.1.1</version>
-                <configuration>
-                    <target>${project.build.directory}/appassembler</target>
-                    <repositoryLayout>flat</repositoryLayout>
-                    <defaultJvmSettings>
-                        <initialMemorySize>256M</initialMemorySize>
-                        <maxMemorySize>1024M</maxMemorySize>
-                    </defaultJvmSettings>
-                    <!--
-                    <platforms>
-                        <platform>windows</platform>
-                        <platform>unix</platform>
-                    </platforms>
-                    <programs>
-                        <program>
-                            <mainClass>modbus.control.EmbeddedJettyService</mainClass>
-                            <name>ModbusControl</name>
-                             Only generate windows shell script for this application 
-                            <platforms>
-                                <platform>windows</platform>
-                            </platforms>
-                        </program>
-                    </programs> 
-                    -->
-                    
-                    <daemons>
-                        <daemon>
-                            <id>ModbusControl</id>
-                            <mainClass>modbus.control.EmbeddedJettyService</mainClass>
-                            <platforms>
-                                <platform>jsw</platform>
-                            </platforms>
-                            <generatorConfigurations>
-                                <generatorConfiguration>
-                                    <generator>jsw</generator>
-                                    <includes>
-                                        <include>windows-x86-32</include>
-                                    </includes>
-                                    <configuration>
-                                        <property>
-                                            <name>set.default.REPO_DIR</name>
-                                            <value>lib</value>
-                                        </property>
-                                    </configuration>
-                                </generatorConfiguration>
-                            </generatorConfigurations>
-                        </daemon>
-                    </daemons>
-                    <repoPath>jsw\ModbusControl\lib</repoPath>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate-daemons</goal>
-                            <goal>create-repository</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            
+        <plugins>            
             <!-- IzPack -->
             <!--  copy other checked resource into staging area, expected by install.xml -->
             <plugin>

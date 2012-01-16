@@ -1,7 +1,5 @@
 package modbus.control.client;
 
-import java.util.List;
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -9,20 +7,14 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-
+import com.google.gwt.user.client.ui.*;
+import java.util.List;
 import modbus.control.client.rpc.DatabaseService;
 import modbus.control.client.rpc.DatabaseServiceAsync;
 import modbus.control.client.rpc.PLCService;
 import modbus.control.client.rpc.PLCServiceAsync;
-import modbus.control.shared.Category;
-import modbus.control.shared.ProcessVar;
+import modbus.control.shared.CategoryJso;
+import modbus.control.shared.ProcessVarJso;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -47,7 +39,7 @@ public class ModbusControl implements EntryPoint {
      * Create a remote service proxy to talk to the server-side DigitalInOut service.
      */
     private final DatabaseServiceAsync database = GWT.create(DatabaseService.class);
-    private List<Category> categorys = null;
+    private List<CategoryJso> CategoryJsos = null;
 
     /**
      * This is the entry point method.
@@ -58,7 +50,7 @@ public class ModbusControl implements EntryPoint {
 
         select.setVisibleItemCount(1);
 
-        class CategorySelectChangeHandler implements ChangeHandler {
+        class CategoryJsoSelectChangeHandler implements ChangeHandler {
 
             @Override
             public void onChange(ChangeEvent event) {
@@ -66,19 +58,19 @@ public class ModbusControl implements EntryPoint {
             }
         }
 
-        final CategorySelectChangeHandler csHandler = new CategorySelectChangeHandler();
+        final CategoryJsoSelectChangeHandler csHandler = new CategoryJsoSelectChangeHandler();
         select.addChangeHandler(csHandler);
 
-        database.getCategorys(new AsyncCallback<List<Category>>() {
+        database.getCategory(new AsyncCallback<List<CategoryJso>>() {
 
             public void onFailure(Throwable caught) {
                 showErrorPanel(RPC_ERROR_TITLE, SERVER_ERROR);
             }
 
-            public void onSuccess(List<Category> result) {
-                categorys = result;
+            public void onSuccess(List<CategoryJso> result) {
+                CategoryJsos = result;
 
-                for (Category r : result) {
+                for (CategoryJso r : result) {
                     select.addItem(r.toString());
                     select.setItemSelected(0, true);
                     refreshSelection(select);
@@ -95,14 +87,14 @@ public class ModbusControl implements EntryPoint {
         RootPanel.get("selectContainer").add(select);
     }
 
-    private void initializeProcessVars(List<ProcessVar> vars) {
+    private void initializeProcessVarJsos(List<ProcessVarJso> vars) {
         if (vars == null) {
             return;
         }
 
         VerticalPanel varPanel = new VerticalPanel();
 
-        for (ProcessVar var : vars) {
+        for (ProcessVarJso var : vars) {
             varPanel.add(new DigitalOutControl(plc, var));
         }
 
@@ -144,32 +136,32 @@ public class ModbusControl implements EntryPoint {
     }
 
     void refreshSelection(ListBox s) {
-        if (categorys == null) {
+        if (CategoryJsos == null) {
             return;
         }
 
         String cat = s.getItemText(s.getSelectedIndex());
 
-        Category selectedCategory = null;
-        for (Category category : categorys) {
-            if (category.toString().equals(cat)) {
-                selectedCategory = category;
+        CategoryJso selectedCategoryJso = null;
+        for (CategoryJso CategoryJso : CategoryJsos) {
+            if (CategoryJso.toString().equals(cat)) {
+                selectedCategoryJso = CategoryJso;
                 break;
             }
         }
 
-        if (selectedCategory == null) {
+        if (selectedCategoryJso == null) {
             return;
         }
 
-        database.getVarsByCategory(selectedCategory, new AsyncCallback<List<ProcessVar>>() {
+        database.getVarsByCategory(selectedCategoryJso, new AsyncCallback<List<ProcessVarJso>>() {
 
             public void onFailure(Throwable caught) {
                 showErrorPanel(RPC_ERROR_TITLE, SERVER_ERROR);
             }
 
-            public void onSuccess(List<ProcessVar> result) {
-                initializeProcessVars(result);
+            public void onSuccess(List<ProcessVarJso> result) {
+                initializeProcessVarJsos(result);
             }
         });
     }
