@@ -10,10 +10,7 @@
  */
 package modbus.control.service;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -57,14 +54,15 @@ public class WrapperMainServiceWin extends Win32Service implements StopableServi
      *            the arguments
      */
     public static void main(String[] args) {
-        System.setProperty("wrapper.config", System.getProperty("user.dir") + "\\src\\main\\resources\\wrapper.conf");
+        System.setProperty("wrapper.config", "D:\\dev\\ModbusControl\\modctrl-app\\src\\main\\resources\\wrapper.conf"); //System.getProperty("user.dir") + "\\src\\main\\resources\\wrapper.conf");
         System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty"); // system properties overwrite properties in conf file.
         System.setProperty("wrapper.tray", "false");
-        System.setProperty("wrapper.working.dir", "");
+        System.setProperty("wrapper.working.dir", "D:\\dev\\ModbusControl\\modctrl-app\\target\\dependency");
 
         String wrapperJar = WrapperLoader.getWrapperJar();
         // set home dir of the service to the wrapper jar parent, so that we may find required libs
         OperatingSystem.instance().setWorkingDir(System.getProperty("user.dir"));
+        
         
 
         service = new WrapperMainServiceWin();

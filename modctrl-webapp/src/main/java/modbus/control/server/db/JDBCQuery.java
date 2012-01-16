@@ -1,16 +1,11 @@
 package modbus.control.server.db;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import modbus.control.shared.Category;
 import modbus.control.shared.PLC;
 import modbus.control.shared.ProcessVar;
-import modbus.control.shared.Category;
 
 public class JDBCQuery {
 

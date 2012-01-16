@@ -1,6 +1,6 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
       
     <modelVersion>4.0.0</modelVersion>
     
@@ -53,6 +53,11 @@
             <artifactId>jamod</artifactId>
             <version>1.2-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>1.8.5</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -98,7 +103,7 @@
                     <target>1.6</target>
                     <sources>
                         <source>
-                            <basedir>src/main/java</basedir>
+                            <basedir>${pom.basedir}/src/main/java</basedir>
                             <includes>
                                 <include>modbus/control/logging/AutoTrace.aj</include>
                                 <include>modbus/control/server/*</include>
@@ -115,6 +120,22 @@
                         <goals>
                             <goal>compile</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <!-- <goal>testCompile</goal> -->
+                        </goals>
+                        <configuration>
+                            <providerSelection>1.8</providerSelection>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

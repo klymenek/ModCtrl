@@ -17,8 +17,9 @@ public class EmbeddedJetty {
             WebAppContext handler = new WebAppContext();
             handler.setContextPath("/");
 
-            String prjFolder = System.getProperty("user.dir") + "\\..\\modctrl-webapp\\target";
-
+            //String prjFolder = System.getProperty("user.dir") + "\\..\\modctrl-webapp\\target";
+            String prjFolder = "D:\\dev\\ModbusControl\\modctrl-webapp\\target";     
+            
             File warFile = new File(prjFolder.toString());
             File[] listFiles = warFile.listFiles();
             for (File file : listFiles) {
