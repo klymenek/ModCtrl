@@ -4,9 +4,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.sql.Connection;
 import java.util.List;
 import modbus.control.api.db.GroovySqlQuery;
+import modbus.control.api.model.Category;
+import modbus.control.api.model.ProcessVar;
 import modbus.control.client.rpc.DatabaseService;
-import modbus.control.shared.CategoryJso;
-import modbus.control.shared.ProcessVarJso;
 
 /**
  * 
@@ -17,7 +17,7 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements
         DatabaseService {
 
     @Override
-    public List<CategoryJso> getCategory() {        
+    public List<Category> getCategory() {        
         return GroovySqlQuery.getCategory((Connection) getServletContext().getAttribute("connection"));
         
 //        try {
@@ -29,9 +29,9 @@ public class DatabaseServiceImpl extends RemoteServiceServlet implements
     }
 
     @Override
-    public List<ProcessVarJso> getVarsByCategory(CategoryJso category) {
+    public List<ProcessVar> getVarsByCategory(Category category) {
         return GroovySqlQuery.getVars((Connection) getServletContext().getAttribute("connection"), category);
-        
+   
 //        try {
 //            return JDBCQuery.getVars(CategoryJso, (Connection) getServletContext().getAttribute("connection"));
 //        } catch (SQLException e) {

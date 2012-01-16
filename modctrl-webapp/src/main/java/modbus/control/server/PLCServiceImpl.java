@@ -1,9 +1,9 @@
 package modbus.control.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import modbus.control.api.model.ProcessVar;
 import modbus.control.api.modbus.ModbusQuery;
 import modbus.control.client.rpc.PLCService;
-import modbus.control.shared.ProcessVarJso;
 
 /**
  * 
@@ -17,13 +17,14 @@ public class PLCServiceImpl extends RemoteServiceServlet implements
      * @param args
      *            - the command line arguments
      */
-    public Integer writeCoil(Boolean state, ProcessVarJso var) {
+    @Override
+    public Integer writeCoil(Boolean state, ProcessVar var) {
 
         return ModbusQuery.writeCoil(state, var);
     }// main
 
     @Override
-    public Boolean readCoil(ProcessVarJso var) {
+    public Boolean readCoil(ProcessVar var) {
 
         return ModbusQuery.readCoil(var);
     }

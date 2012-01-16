@@ -3,9 +3,6 @@ package modbus.control.api.db
 import java.sql.Connection
 import java.util.List
 import java.util.ArrayList
-import modbus.control.api.model.CategoryImpl
-import modbus.control.api.model.PLCImpl
-import modbus.control.api.model.ProcessVarImpl
 import modbus.control.api.model.Category
 import modbus.control.api.model.PLC
 import modbus.control.api.model.ProcessVar
@@ -26,7 +23,7 @@ class GroovySqlQuery {
         def categorys = new ArrayList<Category>()
         
         sql.eachRow(categoryQueryAll) { row -> 
-            def c = new CategoryImpl()
+            def c = new Category()
             c.setId(row.id)
             c.setName(row.name)
             
@@ -40,7 +37,7 @@ class GroovySqlQuery {
         def vars = new ArrayList<ProcessVar>()
         
         sql.eachRow(varQueryByCategory, [category.getId()]) { row -> 
-            def p = new ProcessVarImpl()
+            def p = new ProcessVar()
             p.setId(row.id)
             p.setName(row.name)
             p.setDescription(row.description)
@@ -49,7 +46,7 @@ class GroovySqlQuery {
             p.setCategory(category)
             
             def prow = sql.firstRow(plcQueryById, [row.plc])
-            def plc = new PLCImpl()
+            def plc = new PLC()
             plc.setId(prow.id)
             plc.setIp(prow.ip)
             plc.setName(prow.name)
@@ -67,10 +64,9 @@ class GroovySqlQuery {
                      
         sql.eachRow(categoryQueryAll) { row -> println row.name }
         
-        def c = new CategoryImpl()
+        def c = new Category()
         c.setId(1)
         
         println getVars(sql, c)
     }
 }
-

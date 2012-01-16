@@ -3,8 +3,8 @@ package modbus.control.client.rpc;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.List;
-import modbus.control.shared.CategoryJso;
-import modbus.control.shared.ProcessVarJso;
+import modbus.control.api.model.Category;
+import modbus.control.api.model.ProcessVar;
 
 /**
  * The client side stub for the RPC service.
@@ -12,7 +12,7 @@ import modbus.control.shared.ProcessVarJso;
 @RemoteServiceRelativePath("database")
 public interface DatabaseService extends RemoteService {
 
-    List<CategoryJso> getCategory();
+    List<Category> getCategory();
 
-    List<ProcessVarJso> getVarsByCategory(CategoryJso CategoryJso);
+    List<ProcessVar> getVarsByCategory(Category category);
 }

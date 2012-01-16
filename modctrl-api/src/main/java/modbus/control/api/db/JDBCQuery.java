@@ -3,22 +3,22 @@ package modbus.control.api.db;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import modbus.control.api.model.CategoryImpl;
-import modbus.control.api.model.PLCImpl;
-import modbus.control.api.model.ProcessVarImpl;
+import modbus.control.api.model.Category;
+import modbus.control.api.model.PLC;
+import modbus.control.api.model.ProcessVar;
 
 @Deprecated
 public class JDBCQuery {
 
-    public static List<CategoryImpl> getCategory(Connection con)
+    public static List<Category> getCategory(Connection con)
             throws SQLException {
-        ArrayList<CategoryImpl> category = new ArrayList<CategoryImpl>();
+        ArrayList<Category> category = new ArrayList<Category>();
 
         Statement stmt = con.createStatement();
         ResultSet results = stmt.executeQuery("SELECT * FROM CATEGORYS");
 
         while (results.next()) {
-            CategoryImpl r = new CategoryImpl();
+            Category r = new Category();
 
             r.setId(results.getInt("ID"));
             r.setName(results.getString("NAME"));
@@ -29,13 +29,13 @@ public class JDBCQuery {
         return category;
     }
 
-    public static PLCImpl getPLC(int id, Connection con) throws SQLException {
+    public static PLC getPLC(int id, Connection con) throws SQLException {
         PreparedStatement pstmt = con.prepareStatement("SELECT * FROM MODBUS_PLCS WHERE ID = ?");
         pstmt.setInt(1, id);
 
         ResultSet results = pstmt.executeQuery();
 
-        PLCImpl plc = new PLCImpl();
+        PLC plc = new PLC();
 
         if (results.next()) {
             plc.setId(results.getInt("ID"));
@@ -56,16 +56,16 @@ public class JDBCQuery {
      * @return
      * @throws SQLException
      */
-    public static List<ProcessVarImpl> getVars(CategoryImpl category, Connection con)
+    public static List<ProcessVar> getVars(Category category, Connection con)
             throws SQLException {
-        ArrayList<ProcessVarImpl> vars = new ArrayList<ProcessVarImpl>();
+        ArrayList<ProcessVar> vars = new ArrayList<ProcessVar>();
 
         PreparedStatement pstmt = con.prepareStatement("SELECT * FROM MODBUS_DIGITAL WHERE CATEGORY = ?");
         pstmt.setInt(1, category.getId());
 
         ResultSet results = pstmt.executeQuery();
         while (results.next()) {
-            ProcessVarImpl pv = new ProcessVarImpl();
+            ProcessVar pv = new ProcessVar();
 
             pv.setId(results.getInt("ID"));
             pv.setName(results.getString("NAME"));

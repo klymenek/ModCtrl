@@ -41,10 +41,10 @@
     <modules>
         <module>jamod</module>
         <module>yajsw</module>
+        <module>modctrl-api</module>
         <module>modctrl-webapp</module>
         <module>modctrl-app</module>
-    <module>modctrl-api</module>
-  </modules>
+    </modules>
     
     <build>
         <pluginManagement>

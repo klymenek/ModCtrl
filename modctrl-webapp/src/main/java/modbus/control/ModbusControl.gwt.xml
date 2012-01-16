@@ -13,11 +13,11 @@
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
     <!-- Other module inherits                                      -->
+    <inherits name='modbus.control.api.Data' />
 
     <!-- Specify the app entry point class.                         -->
     <entry-point class='modbus.control.client.ModbusControl' />
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client' />
-    <source path='shared' />
 </module>

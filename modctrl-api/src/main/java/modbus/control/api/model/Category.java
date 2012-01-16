@@ -1,11 +1,29 @@
 package modbus.control.api.model;
 
-public interface Category {
-    public int getId();
+public class Category implements java.io.Serializable {
 
-    public void setId(int id);
+    private static final long serialVersionUID = -612132013583310346L;
+    int id;
+    String name;
 
-    public String getName();
+    public int getId() {
+        return id;
+    }
 
-    public void setName(String name);
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

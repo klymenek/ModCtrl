@@ -13,10 +13,10 @@
     <artifactId>modctrl-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>modctrl-api</name>
-    <url>http://maven.apache.org</url>
-  
+            
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <gwtVersion>2.4.0</gwtVersion>
     </properties>
   
     <dependencies>
@@ -38,6 +38,12 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwtVersion}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
   
@@ -89,5 +95,14 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${pom.basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/model/**</include>
+                    <include>**/*.gwt.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>

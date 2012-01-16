@@ -1,6 +1,6 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
       
     <modelVersion>4.0.0</modelVersion>
     
@@ -34,12 +34,6 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>8.0.4.v20111024</version>
-        </dependency>
-        <!-- Dependency for Java Service Wrapper -->
-        <dependency>
-            <groupId>tanukisoft</groupId>
-            <artifactId>wrapper</artifactId>
-            <version>3.2.3</version>
         </dependency>
         <!-- dependencies for IzPack -->
         <dependency>
@@ -178,9 +172,6 @@
                             <tasks>
                                 <copy todir="${staging.dir}">
                                     <fileset dir="${basedir}/src/izpack" />
-                                </copy>
-                                <copy todir="${staging.dir}">
-                                    <fileset dir="${project.build.directory}/appassembler/jsw" />
                                 </copy>
                                 <copy file="${basedir}/../modctrl-webapp/target/modctrl-webapp-0.0.1-SNAPSHOT.war" todir="${staging.dir}/ModbusControl/lib"/>
                                 <!-- Dependencies of yajsw without maven repo -->

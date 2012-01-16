@@ -9,12 +9,12 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import java.util.List;
+import modbus.control.api.model.Category;
+import modbus.control.api.model.ProcessVar;
 import modbus.control.client.rpc.DatabaseService;
 import modbus.control.client.rpc.DatabaseServiceAsync;
 import modbus.control.client.rpc.PLCService;
 import modbus.control.client.rpc.PLCServiceAsync;
-import modbus.control.shared.CategoryJso;
-import modbus.control.shared.ProcessVarJso;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -39,11 +39,12 @@ public class ModbusControl implements EntryPoint {
      * Create a remote service proxy to talk to the server-side DigitalInOut service.
      */
     private final DatabaseServiceAsync database = GWT.create(DatabaseService.class);
-    private List<CategoryJso> CategoryJsos = null;
+    private List<Category> CategoryJsos = null;
 
     /**
      * This is the entry point method.
      */
+    @Override
     public void onModuleLoad() {
         final ListBox select = new ListBox();
         final Label errorLabel = new Label();
@@ -61,16 +62,18 @@ public class ModbusControl implements EntryPoint {
         final CategoryJsoSelectChangeHandler csHandler = new CategoryJsoSelectChangeHandler();
         select.addChangeHandler(csHandler);
 
-        database.getCategory(new AsyncCallback<List<CategoryJso>>() {
+        database.getCategory(new AsyncCallback<List<Category>>() {
 
+            @Override
             public void onFailure(Throwable caught) {
                 showErrorPanel(RPC_ERROR_TITLE, SERVER_ERROR);
             }
 
-            public void onSuccess(List<CategoryJso> result) {
+            @Override
+            public void onSuccess(List<Category> result) {
                 CategoryJsos = result;
 
-                for (CategoryJso r : result) {
+                for (Category r : result) {
                     select.addItem(r.toString());
                     select.setItemSelected(0, true);
                     refreshSelection(select);
@@ -87,14 +90,14 @@ public class ModbusControl implements EntryPoint {
         RootPanel.get("selectContainer").add(select);
     }
 
-    private void initializeProcessVarJsos(List<ProcessVarJso> vars) {
+    private void initializeProcessVarJsos(List<ProcessVar> vars) {
         if (vars == null) {
             return;
         }
 
         VerticalPanel varPanel = new VerticalPanel();
 
-        for (ProcessVarJso var : vars) {
+        for (ProcessVar var : vars) {
             varPanel.add(new DigitalOutControl(plc, var));
         }
 
@@ -122,6 +125,7 @@ public class ModbusControl implements EntryPoint {
         // Add a handler to close the DialogBox
         closeButton.addClickHandler(new ClickHandler() {
 
+            @Override
             public void onClick(ClickEvent event) {
                 dialogBox.hide();
             }
@@ -142,8 +146,8 @@ public class ModbusControl implements EntryPoint {
 
         String cat = s.getItemText(s.getSelectedIndex());
 
-        CategoryJso selectedCategoryJso = null;
-        for (CategoryJso CategoryJso : CategoryJsos) {
+        Category selectedCategoryJso = null;
+        for (Category CategoryJso : CategoryJsos) {
             if (CategoryJso.toString().equals(cat)) {
                 selectedCategoryJso = CategoryJso;
                 break;
@@ -154,13 +158,15 @@ public class ModbusControl implements EntryPoint {
             return;
         }
 
-        database.getVarsByCategory(selectedCategoryJso, new AsyncCallback<List<ProcessVarJso>>() {
+        database.getVarsByCategory(selectedCategoryJso, new AsyncCallback<List<ProcessVar>>() {
 
+            @Override
             public void onFailure(Throwable caught) {
                 showErrorPanel(RPC_ERROR_TITLE, SERVER_ERROR);
             }
 
-            public void onSuccess(List<ProcessVarJso> result) {
+            @Override
+            public void onSuccess(List<ProcessVar> result) {
                 initializeProcessVarJsos(result);
             }
         });

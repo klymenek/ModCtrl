@@ -1,19 +1,47 @@
 package modbus.control.api.model;
 
-public interface PLC {
-    public int getId();
+public class PLC implements java.io.Serializable {
 
-    public void setId(int id);
+    private static final long serialVersionUID = -612132013583310346L;
+    int id;
+    String name;
+    String ip;
+    int port;
 
-    public String getName();
+    public int getId() {
+        return id;
+    }
 
-    public void setName(String name);
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getIp();
+    public String getName() {
+        return name;
+    }
 
-    public void setIp(String ip);
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getPort();
+    public String getIp() {
+        return ip;
+    }
 
-    public void setPort(int port);
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    @Override
+    public String toString() {
+        return "id=" + id + ", name=" + name;
+    }
 }

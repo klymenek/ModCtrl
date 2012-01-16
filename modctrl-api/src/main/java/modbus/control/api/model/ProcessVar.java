@@ -1,28 +1,66 @@
 package modbus.control.api.model;
 
-public interface ProcessVar {
+public class ProcessVar implements java.io.Serializable {
 
-    public int getId();
+    private static final long serialVersionUID = 8444919865841636943L;
+    int id;
+    int modbusaddr;
+    String name;
+    String description;
+    Category category;
+    PLC plc;
 
-    public void setId(int id);
+    public int getId() {
+        return id;
+    }
 
-    public String getName();
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public void setName(String name);
+    public String getName() {
+        return name;
+    }
 
-    public int getModbusaddr();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setModbusaddr(int modbusaddr);
+    public int getModbusaddr() {
+        return modbusaddr;
+    }
 
-    public String getDescription();
+    public void setModbusaddr(int modbusaddr) {
+        this.modbusaddr = modbusaddr;
+    }
 
-    public void setDescription(String description);
+    public String getDescription() {
+        return description;
+    }
 
-    public Category getCategory();
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public void setCategory(Category category);
+    public Category getCategory() {
+        return category;
+    }
 
-    public PLC getPlc();
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-    public void setPlc(PLC plc);
+    public PLC getPlc() {
+        return plc;
+    }
+
+    public void setPlc(PLC plc) {
+        this.plc = plc;
+    }
+
+    @Override
+    public String toString() {
+        return "id=" + id + ", modbusaddr=" + modbusaddr
+                + ", name=" + name + ", description=" + description;
+    }
 }
