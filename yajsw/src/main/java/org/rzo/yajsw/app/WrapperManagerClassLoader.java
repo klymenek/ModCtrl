@@ -17,56 +17,51 @@ import java.net.URLClassLoader;
 /**
  * The Class WrapperManagerClassLoader.
  */
-public class WrapperManagerClassLoader extends URLClassLoader
-{
+public class WrapperManagerClassLoader extends URLClassLoader {
 
-	/** The _parent. */
-	ClassLoader	_parent;
+    /**
+     * The _parent.
+     */
+    ClassLoader _parent;
 
-	/**
-	 * Instantiates a new wrapper manager class loader.
-	 * 
-	 * @param urls
-	 *            the urls
-	 * @param parent
-	 *            the parent
-	 */
-	public WrapperManagerClassLoader(URL[] urls, ClassLoader parent)
-	{
-		super(urls, null);
-		_parent = parent;
-	}
+    /**
+     * Instantiates a new wrapper manager class loader.
+     *
+     * @param urls the urls
+     * @param parent the parent
+     */
+    public WrapperManagerClassLoader(URL[] urls, ClassLoader parent) {
+        super(urls, null);
+        _parent = parent;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.ClassLoader#loadClass(java.lang.String, boolean)
-	 */
-	@Override
-	public synchronized Class<?> findClass(String name) throws ClassNotFoundException
-	{
-		// First, check if the class has already been loaded
-		Class c = findLoadedClass(name);
-		if (c == null)
-		{
-			if (!"org.rzo.yajsw.app.WrapperManager".equals(name) && !"org.rzo.yajsw.app.WrapperManagerProxy".equals(name))
-				try
-				{
-					c = super.findClass(name);
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.ClassLoader#loadClass(java.lang.String, boolean)
+     */
+    @Override
+    public synchronized Class<?> findClass(String name) throws ClassNotFoundException {
+        // First, check if the class has already been loaded
+        Class c = findLoadedClass(name);
+        if (c == null) {
+            if (!"org.rzo.yajsw.app.WrapperManager".equals(name) && !"org.rzo.yajsw.app.WrapperManagerProxy".equals(name)) {
+                try {
+                    c = super.findClass(name);
 
-				}
-				catch (ClassNotFoundException e)
-				{
-					// If still not found, then invoke findClass in order
-					// to find the class.
-				}
-		}
-		if (c == null)
-			if (_parent != null)
-				c = _parent.loadClass(name);
+                } catch (ClassNotFoundException e) {
+                    // If still not found, then invoke findClass in order
+                    // to find the class.
+                }
+            }
+        }
+        if (c == null) {
+            if (_parent != null) {
+                c = _parent.loadClass(name);
+            }
+        }
 
-		return c;
+        return c;
 
-	}
-
+    }
 }

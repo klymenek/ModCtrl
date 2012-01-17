@@ -28,10 +28,9 @@ import com.izforge.izpack.gui.LayoutConstants;
 import com.izforge.izpack.installer.InstallData;
 import com.izforge.izpack.installer.InstallerFrame;
 import com.izforge.izpack.installer.IzPanel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.LayoutManager2;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 
 /**
  * The Custom MyHellPanel taken from MyHello
@@ -140,6 +139,7 @@ public class MyHelloPanel extends IzPanel
      *
      * @return Always true.
      */
+    @Override
     public boolean isValidated()
     {
         return true;

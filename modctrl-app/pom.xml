@@ -169,13 +169,15 @@
                         </goals>
                         <configuration>
                             <!-- license file etc.. -->
-                            <tasks>
+                            <tasks>                                
                                 <copy todir="${staging.dir}">
                                     <fileset dir="${basedir}/src/izpack" />
                                 </copy>
-                                <copy file="${basedir}/../modctrl-webapp/target/modctrl-webapp-0.0.1-SNAPSHOT.war" todir="${staging.dir}/ModbusControl/lib"/>
+                                <copy file="${basedir}/src/main/resources/wrapper.conf" todir="${staging.dir}/ModbusControl/conf"/>
+                                <copy file="${basedir}/target/modctrl-app-0.0.1-SNAPSHOT.jar" todir="${staging.dir}/ModbusControl/lib"/>  
+                                <copy file="${basedir}/../modctrl-webapp/target/modctrl-webapp-0.0.1-SNAPSHOT.war" todir="${staging.dir}/ModbusControl/lib"/>                                                                
                                 <!-- Dependencies of yajsw without maven repo -->
-                                <copy todir="${project.build.directory}/dependency">
+                                <copy todir="${staging.dir}/ModbusControl/lib"> <!-- " ${project.build.directory}/dependency" -->
                                     <fileset dir="${basedir}/lib" />
                                 </copy>
                             </tasks>
@@ -197,7 +199,7 @@
                         <configuration>
                             <stripVersion>true</stripVersion>
                             <excludeGroupIds>org.codehaus.izpack</excludeGroupIds>
-                            <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                            <outputDirectory>${staging.dir}/ModbusControl/lib<!-- ${project.build.directory}/dependency --></outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

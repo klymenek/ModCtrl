@@ -17,9 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-
 import jnacontrib.win32.Win32Service;
-
 import org.rzo.yajsw.Constants;
 import org.rzo.yajsw.boot.WrapperLoader;
 import org.rzo.yajsw.config.YajswConfigurationImpl;

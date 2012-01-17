@@ -6,6 +6,13 @@
             <param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n"/>
         </layout>
     </appender>
+    <appender name="util" class="org.apache.log4j.FileAppender">
+        <param name="File" value="D:\\dev\\Test.log" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%t %-5p %c{2} - %m%n"/>
+        </layout>           
+    </appender>
     <root>
         <priority value="debug"></priority>
         <appender-ref ref="stdout"/>

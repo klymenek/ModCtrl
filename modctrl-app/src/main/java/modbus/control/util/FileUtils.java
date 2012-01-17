@@ -16,11 +16,11 @@ public class FileUtils {
     }
     
     public static void listFiles() {
-        File f = new File("D:\\dev\\ModbusControl\\modctrl-app\\target\\dependency");
+        File f = new File("D:\\dev\\ModCtrl\\modctrl-app\\target\\staging\\ModbusControl\\lib");
         
         int n = 1;
         for (File fi : f.listFiles()) {
-            System.out.println("wrapper.java.classpath." + n + "=" + fi.getName());
+            System.out.println("wrapper.java.classpath." + n + "=lib\\\\" + fi.getName());
             n++;
         }
     }

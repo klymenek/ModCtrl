@@ -1,27 +1,26 @@
 package org.rzo.yajsw.app;
 
-public interface WrapperManagerImplMBean
-{
-	public void restart();
+public interface WrapperManagerImplMBean {
 
-	public void start();
+    public void restart();
 
-	public void stop();
+    public void start();
 
-	public void stopTimer();
+    public void stop();
 
-	public void threadDump();
+    public void stopTimer();
 
-	boolean isControlledByWrapper();
+    public void threadDump();
 
-	boolean isLaunchedAsService();
+    boolean isControlledByWrapper();
 
-	public boolean isAppearHanging();
+    boolean isLaunchedAsService();
 
-	public void setAppearHanging(boolean appearHanging);
-	
-	public void dumpHeap(String fileName);
-	
-	public String getStopReason();
+    public boolean isAppearHanging();
 
+    public void setAppearHanging(boolean appearHanging);
+
+    public void dumpHeap(String fileName);
+
+    public String getStopReason();
 }

@@ -17,75 +17,72 @@ import java.util.Properties;
 /**
  * The Interface WrapperManager.
  */
-public interface WrapperManager
-{
+public interface WrapperManager {
 
-	/**
-	 * Gets the main method.
-	 * 
-	 * @return the main method
-	 */
-	Method getMainMethod();
+    /**
+     * Gets the main method.
+     *
+     * @return the main method
+     */
+    Method getMainMethod();
 
-	/**
-	 * Gets the main method args.
-	 * 
-	 * @return the main method args
-	 */
-	Object[] getMainMethodArgs();
+    /**
+     * Gets the main method args.
+     *
+     * @return the main method args
+     */
+    Object[] getMainMethodArgs();
 
-	/**
-	 * Checks if is exit on main terminate.
-	 * 
-	 * @return true, if is exit on main terminate
-	 */
-	int getExitOnMainTerminate();
+    /**
+     * Checks if is exit on main terminate.
+     *
+     * @return true, if is exit on main terminate
+     */
+    int getExitOnMainTerminate();
 
-	/**
-	 * Inits the.
-	 * 
-	 * @param args
-	 *            the args
-	 * @param wrapperClassLoader
-	 *            the wrapper class loader
-	 */
-	void init(String[] args, ClassLoader wrapperClassLoader);
+    /**
+     * Inits the.
+     *
+     * @param args the args
+     * @param wrapperClassLoader the wrapper class loader
+     */
+    void init(String[] args, ClassLoader wrapperClassLoader);
 
-	/**
-	 * Start.
-	 */
-	void start();
+    /**
+     * Start.
+     */
+    void start();
 
-	/**
-	 * Thread dump.
-	 */
-	public void threadDump();
+    /**
+     * Thread dump.
+     */
+    public void threadDump();
 
-	/**
-	 * Gets the pid.
-	 * 
-	 * @return the pid
-	 */
-	public int getPid();
+    /**
+     * Gets the pid.
+     *
+     * @return the pid
+     */
+    public int getPid();
 
-	/**
-	 * Stop.
-	 */
-	public void stop();
+    /**
+     * Stop.
+     */
+    public void stop();
 
-	public void restart();
+    public void restart();
 
-	String getGroovyScript();
+    String getGroovyScript();
 
-	int getExitOnException();
-	
-	public void reportServiceStartup();
+    int getExitOnException();
 
-	void executeScript(String scriptFileName, ClassLoader wrapperClassLoader);
-	
-	public void signalStopping(int timeoutHint);
-	
-	public Properties getProperties();
-	
-	public String getStopReason();
+    public void reportServiceStartup();
+
+    void executeScript(String scriptFileName, ClassLoader wrapperClassLoader);
+
+    public void signalStopping(int timeoutHint);
+
+    public Properties getProperties();
+
+    public String getStopReason();
 }

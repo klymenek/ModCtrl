@@ -1,11 +1,14 @@
 package modbus.control;
 
 import java.io.File;
+import org.apache.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class EmbeddedJetty {
+    
+    private static final Logger logger = Logger.getLogger(EmbeddedJetty.class);
 
     public static void main(String[] args) {
         
@@ -17,8 +20,9 @@ public class EmbeddedJetty {
             WebAppContext handler = new WebAppContext();
             handler.setContextPath("/");
 
-            //String prjFolder = System.getProperty("user.dir") + "\\..\\modctrl-webapp\\target";
-            String prjFolder = "D:\\dev\\ModbusControl\\modctrl-webapp\\target";     
+            String prjFolder = System.getProperty("user.dir") + "\\lib";    
+            
+            logger.info("WAR FOLDER RUNTIME - " + prjFolder);
             
             File warFile = new File(prjFolder.toString());
             File[] listFiles = warFile.listFiles();
@@ -29,7 +33,9 @@ public class EmbeddedJetty {
             }
 
             if (handler.getWar() == null || handler.getWar().isEmpty()) {
-                prjFolder = System.getProperty("user.dir") + "\\..\\lib";
+                prjFolder = System.getProperty("user.dir") + "\\..\\modctrl-webapp\\target";
+                
+                logger.info("WAR FOLDER DEBUG - " + prjFolder);
 
                 warFile = new File(prjFolder.toString());
                 listFiles = warFile.listFiles();
