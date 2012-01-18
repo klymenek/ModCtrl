@@ -180,6 +180,10 @@
                                 <copy todir="${staging.dir}/ModbusControl/lib"> <!-- " ${project.build.directory}/dependency" -->
                                     <fileset dir="${basedir}/lib" />
                                 </copy>
+                                
+                                <copy todir="C:/ModbusControl"> <!-- " ${project.build.directory}/dependency" -->
+                                    <fileset dir="${staging.dir}/ModbusControl" />
+                                </copy>
                             </tasks>
                         </configuration>
                     </execution>

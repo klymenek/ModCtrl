@@ -1,4 +1,4 @@
-package org.rzo.yajsw.boot;
+package modbus.control.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +14,10 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import org.rzo.yajsw.Constants;
 import org.rzo.yajsw.app.WrapperJVMMain;
+import org.rzo.yajsw.boot.WrapperClassLoader;
+import org.rzo.yajsw.os.OperatingSystem;
 
-public class WrapperLoader {
+public class WrapperLoaderModCtrl {
 
     private static boolean checkPath(String path) {
         int ix = path.indexOf("!");
@@ -195,6 +197,41 @@ public class WrapperLoader {
         URL[] urls = new URL[core.length + extended.length];
         System.arraycopy(core, 0, urls, 0, core.length);
         System.arraycopy(extended, 0, urls, core.length, extended.length);
+        return new WrapperClassLoader(urls, Thread.currentThread().getContextClassLoader());
+    }
+
+    public static URL[] getModCtrlClasspath() {
+        //String homedir = "D:\\dev\\ModCtrl\\modctrl-app\\target\\staging\\ModbusControl\\lib";
+        String homedir = "C:\\ModbusControl\\lib";
+        File libdir = new File(homedir);
+
+        ArrayList classpath = new ArrayList();
+
+        //classpath.add(new File("D:\\dev\\ModCtrl\\modctrl-app\\target\\classes"));
+
+
+        for (File f : libdir.listFiles()) {
+            classpath.add(f);
+        }
+
+        URL[] urlsArr = new URL[classpath.size()];
+        int i = 0;
+        for (Iterator it = classpath.iterator(); it.hasNext(); i++) {
+            try {
+                urlsArr[i] = ((File) it.next()).toURI().toURL();
+                //System.out.println("classpath: "+urlsArr[i]);
+            } catch (Exception e) {
+                // log.throwing(WrapperMain.class.getName(), "main", e);
+                e.printStackTrace();
+            }
+        }
+
+        return urlsArr;
+
+    }
+
+    public static URLClassLoader getModCtrlClassLoader() {
+        URL[] urls = getModCtrlClasspath();
         return new WrapperClassLoader(urls, Thread.currentThread().getContextClassLoader());
     }
 

@@ -1,35 +1,26 @@
-package org.rzo.yajsw.wrapper;
+package modbus.control.service;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.*;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Logger;
-
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationUtils;
 import org.rzo.yajsw.Constants;
-import org.rzo.yajsw.boot.WrapperServiceBooter;
 import org.rzo.yajsw.cache.Cache;
 import org.rzo.yajsw.config.YajswConfigurationImpl;
 import org.rzo.yajsw.os.OperatingSystem;
 import org.rzo.yajsw.os.Service;
 import org.rzo.yajsw.os.ms.win.w32.WindowsXPService;
 import org.rzo.yajsw.os.posix.PosixService;
-import org.rzo.yajsw.util.Utils;
 
-public class WrappedService {
+public class WrappedServiceModCtrl {
 
     /**
      * The _config.
@@ -358,7 +349,7 @@ public class WrappedService {
     }
 
     private String getServiceMainClass() {
-        return WrapperServiceBooter.class.getName();
+        return WrapperServiceBooterModCtrl.class.getName();
     }
 
     /**
@@ -369,23 +360,38 @@ public class WrappedService {
     private ArrayList jvmOptions() {
         ArrayList result = new ArrayList();
         result.add("-classpath");
+//        ArrayList classpath = new ArrayList();
+//        String[] files = _config.getString("java.class.path").split(PATHSEP);
+//        for (int i = 0; i < files.length; i++) {
+//            File f = null;
+//            try {
+//                f = new File(files[i]).getCanonicalFile();
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            if (f != null && f.exists() && !classpath.contains(f.getAbsolutePath())) {
+//                // System.out.println("adding classpath :"+f+":");
+//                classpath.add(f);
+//                //if (f.getName().endsWith(".jar"))
+//                //	addClasspathFromManifest(classpath, f);
+//            }
+//        }
+        
         ArrayList classpath = new ArrayList();
-        String[] files = _config.getString("java.class.path").split(PATHSEP);
-        for (int i = 0; i < files.length; i++) {
-            File f = null;
-            try {
-                f = new File(files[i]).getCanonicalFile();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            if (f != null && f.exists() && !classpath.contains(f.getAbsolutePath())) {
-                // System.out.println("adding classpath :"+f+":");
-                classpath.add(f);
-                //if (f.getName().endsWith(".jar"))
-                //	addClasspathFromManifest(classpath, f);
-            }
-        }
+        
+        //classpath.add(new File("D:\\dev\\ModCtrl\\modctrl-app\\target\\classes"));
+
+
+        //String homedir = "D:\\dev\\ModCtrl\\modctrl-app\\target\\staging\\ModbusControl\\lib";
+        String homedir = "C:\\ModbusControl\\lib";
+        File libdir = new File(homedir);
+        
+        for (File f : libdir.listFiles()) {
+            classpath.add(f);
+        }       
+
+
         StringBuffer sb = new StringBuffer();
         for (Iterator it = classpath.iterator(); it.hasNext();) {
             String canonicalFileName = null;
@@ -431,15 +437,17 @@ public class WrappedService {
     }
 
     public static void main(String[] args) {
-        System.setProperty("wrapper.java.app.mainclass", "test.HelloWorld");
-        System.setProperty("wrapper.ntservice.name", "JavaWrapperTest1");
-        System.setProperty("wrapper.filter.trigger.1", "999");
-        System.setProperty("wrapper.java.additional.1", "-Xrs");
-        System.setProperty("wrapper.on_exit.default", "RESTART");
-        //TEST
-        System.setProperty("wrapper.ntservice.debug", "true");
+//        System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty");
+//        System.setProperty("wrapper.ntservice.name", "modctrl");
+//        System.setProperty("wrapper.filter.trigger.1", "999");
+//        System.setProperty("wrapper.java.additional.1", "-Xrs");
+//        System.setProperty("wrapper.on_exit.default", "RESTART");
+//        //TEST
+//        System.setProperty("wrapper.ntservice.debug", "false");
         
-        WrappedService w = new WrappedService();
+        System.setProperty("wrapper.config", "D:\\dev\\ModCtrl\\modctrl-app\\target\\staging\\ModbusControl\\conf\\wrapper.conf");
+
+        WrappedServiceModCtrl w = new WrappedServiceModCtrl();
 
         System.out.println("init");
         w.init();

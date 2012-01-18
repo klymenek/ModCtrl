@@ -1,10 +1,10 @@
-package org.rzo.yajsw.boot;
+package modbus.control.service;
 
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URLClassLoader;
 
-public class WrapperServiceBooter {
+public class WrapperServiceBooterModCtrl {
 
     public static void main(String[] args) {
         if (System.getProperty("java.io.tmpdir") != null) {
@@ -14,12 +14,12 @@ public class WrapperServiceBooter {
             }
         }
 
-        URLClassLoader cl = WrapperLoader.getWrapperClassLoader();
+        URLClassLoader cl = WrapperLoaderModCtrl.getModCtrlClassLoader();
         Thread.currentThread().setContextClassLoader(cl);
         String osName = System.getProperty("os.name");
         String clazz = null;
         if (osName.toLowerCase().startsWith("windows")) {
-            clazz = "org.rzo.yajsw.app.WrapperMainServiceWin";
+            clazz = "modbus.control.service.WrapperMainServiceWinModCtrl";
         } else {
             clazz = "org.rzo.yajsw.app.WrapperMainServiceUnix";
         }
