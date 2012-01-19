@@ -110,7 +110,7 @@ public class WrapperMainServiceWinModCtrl extends Win32Service implements Stopab
                     wList.startAll();
                 } catch (Throwable ex) {
                     ex.printStackTrace();
-                    w.getWrapperLogger().info("Win Service: error starting wrapper " + ex.getMessage());
+                    w.getWrapperLogger().info("Win Service: error starting wrapper " + ex.getMessage() + ex.toString());
                     Runtime.getRuntime().halt(999);
                 }
             }

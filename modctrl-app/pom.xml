@@ -20,6 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <staging.dir>${project.build.directory}/staging</staging.dir>
+        <installer.dir>${project.build.directory}/installer</installer.dir>
         <izpack-standalone.version>4.3.5</izpack-standalone.version>
         <jna.version>3.3.0</jna.version>
     </properties>
@@ -152,9 +153,25 @@
         </dependency>
     </dependencies>
     
- 
     <build>
-        <plugins>            
+        <plugins>   
+            <!-- Example for executing a Java Class between the build <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+                        <id>init</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>modbus.control.api.db.InitDB</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
             <!-- IzPack -->
             <!--  copy other checked resource into staging area, expected by install.xml -->
             <plugin>
@@ -180,7 +197,11 @@
                                 <copy todir="${staging.dir}/ModbusControl/lib"> <!-- " ${project.build.directory}/dependency" -->
                                     <fileset dir="${basedir}/lib" />
                                 </copy>
-                                
+                                <!-- copy Database File to Staging -->
+                                <copy todir="${staging.dir}/ModbusControl/db"> <!-- " ${project.build.directory}/dependency" -->
+                                    <fileset dir="${basedir}/../modctrl-api/src/main/resources/db" />
+                                </copy>
+                                <mkdir dir="${staging.dir}/ModbusControl/logs"/>
                                 <copy todir="C:/ModbusControl"> <!-- " ${project.build.directory}/dependency" -->
                                     <fileset dir="${staging.dir}/ModbusControl" />
                                 </copy>
@@ -203,12 +224,12 @@
                         <configuration>
                             <stripVersion>true</stripVersion>
                             <excludeGroupIds>org.codehaus.izpack</excludeGroupIds>
-                            <outputDirectory>${staging.dir}/ModbusControl/lib<!-- ${project.build.directory}/dependency --></outputDirectory>
+                            <outputDirectory>${staging.dir}/ModbusControl/lib<!-- ${project.build.directory}/dependency -->
+                            </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin> 
-
             <!--  see install.xml to see how MyHelloPanel is used -->
             <plugin>
                 <groupId>org.codehaus.izpack</groupId>
@@ -228,13 +249,44 @@
                 <executions>
                     <execution>
                         <id>standard-installer</id>
-                        <phase>install</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>izpack</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
+            <!-- make an .exe from izpack installer -->
+            <plugin>
+                <groupId>org.bluestemsoftware.open.maven.plugin</groupId>
+                <artifactId>launch4j-plugin</artifactId>
+                <version>1.5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>launch4j</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <dontWrapJar>false</dontWrapJar>
+                            <headerType>gui</headerType>
+                            <outfile>${project.build.directory}/modctrl-install.exe</outfile>
+                            <jar>${project.build.directory}/modctrl-app-0.0.1-SNAPSHOT-standard.jar</jar>
+                            <errTitle>ModCtrl</errTitle>
+                            <jre>
+                                <minVersion>1.6.0</minVersion>
+                            </jre>
+                            <splash>
+                                <file>${pom.basedir}/src/main/resources/splash.bmp</file>
+                                <waitForWindow>true</waitForWindow>
+                                <timeout>60</timeout>
+                                <timeoutErr>false</timeoutErr>
+                            </splash>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>        
     </build>
 </project>

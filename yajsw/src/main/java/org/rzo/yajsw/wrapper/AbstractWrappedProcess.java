@@ -81,7 +81,7 @@ import org.rzo.yajsw.util.DaemonThreadFactory;
 import org.rzo.yajsw.util.SimpleThreadFactory;
 import org.rzo.yajsw.util.Utils;
 
-import com.sun.jna.Platform;
+import com.sun.jna.rzo.Platform;
 
 public abstract class AbstractWrappedProcess implements WrappedProcess, Constants, AbstractWrappedProcessMBean {
 

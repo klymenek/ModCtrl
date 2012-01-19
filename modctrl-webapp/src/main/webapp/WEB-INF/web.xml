@@ -20,7 +20,7 @@
     <!-- start DB Connection with params -->
     <context-param>
         <param-name>db.url</param-name>
-        <param-value>jdbc:h2:~/wagocontrol</param-value>
+        <param-value>jdbc:h2:C:\ModbusControl\db\wagocontrol</param-value>
         <!-- <param-value>jdbc:h2:~/wagocontrol;INIT=CREATE SCHEMA IF NOT EXISTS WAGOCONTROL\;RUNSCRIPT FROM '~/sql/db_init.sql';DB_CLOSE_DELAY=-1</param-value> -->
     </context-param>
     <context-param>

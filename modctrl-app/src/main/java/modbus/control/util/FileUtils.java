@@ -23,5 +23,10 @@ public class FileUtils {
             System.out.println("wrapper.java.classpath." + n + "=lib\\\\" + fi.getName());
             n++;
         }
+        
+        
+        for (File fi : f.listFiles()) {
+            System.out.println("<jar src=\"" + fi.getAbsolutePath() + "\"/>");
+        }
     }
 }

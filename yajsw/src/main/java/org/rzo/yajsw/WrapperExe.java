@@ -46,7 +46,7 @@ import org.rzo.yajsw.wrapper.WrappedProcessFactory;
 import org.rzo.yajsw.wrapper.WrappedProcessList;
 import org.rzo.yajsw.wrapper.WrappedService;
 
-import com.sun.jna.Platform;
+import com.sun.jna.rzo.Platform;
 
 // TODO: Auto-generated Javadoc
 /**

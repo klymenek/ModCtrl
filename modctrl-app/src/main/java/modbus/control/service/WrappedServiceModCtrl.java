@@ -437,15 +437,13 @@ public class WrappedServiceModCtrl {
     }
 
     public static void main(String[] args) {
-//        System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty");
-//        System.setProperty("wrapper.ntservice.name", "modctrl");
-//        System.setProperty("wrapper.filter.trigger.1", "999");
-//        System.setProperty("wrapper.java.additional.1", "-Xrs");
-//        System.setProperty("wrapper.on_exit.default", "RESTART");
-//        //TEST
-//        System.setProperty("wrapper.ntservice.debug", "false");
-        
-        System.setProperty("wrapper.config", "D:\\dev\\ModCtrl\\modctrl-app\\target\\staging\\ModbusControl\\conf\\wrapper.conf");
+        System.setProperty("wrapper.java.app.mainclass", "modbus.control.EmbeddedJetty");
+        System.setProperty("wrapper.ntservice.name", "modctrl");
+        System.setProperty("wrapper.filter.trigger.1", "999");
+        System.setProperty("wrapper.java.additional.1", "-Xrs");
+        System.setProperty("wrapper.on_exit.default", "RESTART");
+        //TEST
+        System.setProperty("wrapper.ntservice.debug", "false");                
 
         WrappedServiceModCtrl w = new WrappedServiceModCtrl();
 

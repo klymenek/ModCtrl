@@ -125,12 +125,12 @@ public class YajswConfigurationImpl extends CompositeConfiguration implements Ya
          * in.getDefaultLookup(); in.setDefaultLookup(new
          * MyStrLookup(orgLookup));
          */
-        _interpolator = new GInterpolator(this, true, null, _scriptUtils);
-        try {
-            this.setInterpolator(_interpolator);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
+//        _interpolator = new GInterpolator(this, true, null, _scriptUtils);
+//        try {
+//            this.setInterpolator(_interpolator);
+//        } catch (Exception e1) {
+//            e1.printStackTrace();
+//        }
 
         if (_localConfiguration != null) {
             _systemConfiguration.addConfiguration(_localConfiguration);

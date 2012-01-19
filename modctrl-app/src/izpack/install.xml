@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
-
-<installation version="1.0">
+<installation version="1.0" >
 
     <!-- 
         The info section.
@@ -10,9 +9,9 @@
         <appname>@{project.name}</appname>
         <appversion>0.0.1</appversion>
         <authors>
-            <author name="${user.name}" email="jpz@superman.org"/>
+            <author name="${user.name}" email="no@name.org"/>
         </authors>
-        <url>http://localhost:8080</url>
+        <url>http://localhost:8888</url>
     </info>
 
     <!-- 
@@ -48,13 +47,69 @@
         <panel classname="LicencePanel"/>
         <panel classname="TargetPanel"/>
         <panel classname="PacksPanel"/>
-        <panel classname="InstallPanel"/>
+        <panel classname="InstallPanel">
+            <actions>
+                <!-- <action stage="preconstruct" classname="modbus.control.izpack.InstallService" />
+                <action stage="preactivate" classname="ConnectionPreActivateAction" />
+                <action stage="prevalidate" classname="ConnectionPreVAlidateAction" /> -->
+                <action stage="postvalidate" classname="modbus.control.izpack.InstallService" />  
+            </actions>
+        </panel>
         <panel classname="FinishPanel"/>
     </panels>
 
-    <!-- <jar src="dependency/plexus-utils.jar"/> -->
-    <jar src="../modctrl-app-0.0.1-SNAPSHOT.jar"/>
-
+    <!-- <jar src="dependency/plexus-utils.jar"/>
+    <jar src="../modctrl-app-0.0.1-SNAPSHOT.jar"/> -->
+    
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\activation.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\ahessian.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\com.caucho.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\com.jeta.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-beanutils.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-cli.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-collections.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-configuration.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-digester.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-io.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-lang.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-logging.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\commons-vfs2.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\forms.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\formsrt.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\groovy-all.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\hessian4.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-continuation.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-http.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-io.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-security.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-server.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-servlet.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-util.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-webapp.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jetty-xml.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jna-platform.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jna.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jrexx.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\jta.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\junit.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\log4j.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\mail.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\maven-scm-api.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\maven-scm-provider-svn-commons.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\maven-scm-provider-svnexe.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\modctrl-app-0.0.1-SNAPSHOT.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\modctrl-webapp-0.0.1-SNAPSHOT.war"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\netty.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\org.rzo.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\oro.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\plexus-utils.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\quartz.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\regexp.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\servlet-api.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\slf4j-api.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\velocity.jar"/>
+    <jar src="D:\dev\ModCtrl\modctrl-app\target\staging\ModbusControl\lib\yajsw.jar"/>
+    
     <!-- 
         The packs section.
         We specify here our packs.
@@ -70,12 +125,12 @@
         <pack name="ModbusControl" required="yes">
             <description>The application files</description>
             <file src="ModbusControl" targetdir="$INSTALL_PATH"/>
-            <executeable keep="true" failure="warn" targetfile="$INSTALL_PATH/ModbusControl/bin/ModbusControl.bat" stage="postinstall">
+            <!-- <executeable keep="true" failure="warn" targetfile="$INSTALL_PATH/ModbusControl/bin/ModbusControl.bat" stage="postinstall">
                 <arg>install</arg>
             </executeable>
             <executeable keep="false" failure="warn" targetfile="$INSTALL_PATH/ModbusControl/bin/ModbusControl.bat" stage="uninstall">
                 <arg>remove</arg>
-            </executeable>    
+            </executeable> -->             
         </pack>
         <pack name="Docs" required="no">
             <description>The documentation</description>
@@ -83,5 +138,4 @@
             <!-- Reccursive adding -->
         </pack>
     </packs>
-
 </installation>

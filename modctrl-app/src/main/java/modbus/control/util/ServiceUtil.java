@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package modbus.control.service;
+package modbus.control.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.rzo.yajsw.app.WrapperMainServiceWin;
+import modbus.control.service.WrappedServiceModCtrl;
 import org.rzo.yajsw.wrapper.WrappedProcess;
 import org.rzo.yajsw.wrapper.WrappedProcessFactory;
-import org.rzo.yajsw.wrapper.WrappedService;
 
 /**
  *
@@ -17,22 +12,22 @@ import org.rzo.yajsw.wrapper.WrappedService;
  */
 public class ServiceUtil {
 
-    enum ACTION {
+    public enum ACTION {
 
         INSTALL, REMOVE, START
     }
-
+    
     public static void main(String[] args) {
-        ACTION a = ACTION.INSTALL;
+        serviceAction(ACTION.INSTALL);
+    }
 
+    public static void serviceAction(ACTION action) {                
         // global configuration
-        System.setProperty("wrapper.config", "D:\\dev\\ModCtrl\\modctrl-app\\target\\staging\\ModbusControl\\conf\\wrapper.conf");
+        System.setProperty("wrapper.config", "C:\\ModbusControl\\conf\\wrapper.conf");
 
-        switch (a) {
-            case INSTALL:
-                
-                
-                WrappedService ws = new WrappedService();
+        switch (action) {
+            case INSTALL:                
+                WrappedServiceModCtrl ws = new WrappedServiceModCtrl();
                 ws.init(); // read in configuration
                 ws.install(); // start the service
 

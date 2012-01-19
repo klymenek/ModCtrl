@@ -15,7 +15,7 @@ import java.util.concurrent.Executor;
 import org.rzo.yajsw.os.Mouse;
 
 import com.sun.jna.Native;
-import com.sun.jna.Platform;
+import com.sun.jna.rzo.Platform;
 import com.sun.jna.Structure;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
