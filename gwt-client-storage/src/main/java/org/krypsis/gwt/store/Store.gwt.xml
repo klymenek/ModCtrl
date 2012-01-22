@@ -1,0 +1,5 @@
+<module>
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="com.google.code.gwt.storage.Html5Storage"/>
+    <inherits name="com.google.gwt.json.JSON"/>
+</module>

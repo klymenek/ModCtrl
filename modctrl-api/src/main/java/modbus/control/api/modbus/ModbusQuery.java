@@ -89,16 +89,13 @@ public class ModbusQuery {
     }
 
     public static Boolean readCoilTCP(ProcessVar var) {
-        InetAddress addr = null;
+        InetAddress addr;
         TCPMasterConnection con = null;
-        ModbusRequest req = null;
-
-        ModbusTCPTransaction trans = null;
+        ModbusRequest req;
+        ModbusTCPTransaction trans;
 
         boolean in = false;
-
         try {
-
             // 1. Setup the parameters
             addr = InetAddress.getByName(var.getPlc().getIp());
 
@@ -108,7 +105,6 @@ public class ModbusQuery {
             con.connect();
             logger.debug("Connected to " + addr.toString() + ":"
                     + con.getPort());
-
 
             // 3. Prepare the requests
             req = new ReadInputDiscretesRequest(var.getModbusaddr(), 1);
@@ -137,10 +133,10 @@ public class ModbusQuery {
         // Debugging Ausgaben aktivieren
         System.setProperty("net.wimpi.modbus.debug", "true");
 
-        InetAddress addr = null;
+        InetAddress addr;
         UDPMasterConnection con = null;
-        WriteCoilRequest req = null;
-        ModbusUDPTransaction trans = null;
+        WriteCoilRequest req;
+        ModbusUDPTransaction trans;
 
         try {
             // 1. Set Parameters
@@ -183,11 +179,10 @@ public class ModbusQuery {
     }
 
     public static Boolean readCoilUDP(ProcessVar var) {
-        InetAddress addr = null;
+        InetAddress addr;
         UDPMasterConnection con = null;
-        ModbusRequest req = null;
-
-        ModbusUDPTransaction trans = null;
+        ModbusRequest req;
+        ModbusUDPTransaction trans;
 
         boolean in = false;
 

@@ -44,6 +44,7 @@
         <module>modctrl-api</module>
         <module>modctrl-webapp</module>
         <module>modctrl-app</module>
+        <module>gwt-client-storage</module>
     </modules>
     
     <build>

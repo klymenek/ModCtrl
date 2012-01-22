@@ -1,0 +1,10 @@
+<module rename-to="example">
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="org.krypsis.gwt.store.Store"/>
+    <inherits name="com.google.gwt.inject.Inject"/>
+    
+    <entry-point class='org.krypsis.gwt.store.example.client.Example'/>
+    
+    <source path="client" />
+    <source path="shared" />
+</module>

@@ -1,0 +1,5 @@
+<module>
+  <inherits name="org.krypsis.gwt.store.Store"/>
+  <inherits name="com.google.gwt.junit.JUnit"/>
+  <source path="client"/>
+</module>
