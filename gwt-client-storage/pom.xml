@@ -51,6 +51,15 @@
     <build>
         <resources>
             <resource>
+                <directory>${pom.basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.java</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <!-- <resources>
+            <resource>
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.java</include>
@@ -64,7 +73,7 @@
                     <include>**/*.xml</include>
                 </includes>
             </resource>
-        </resources>
+        </resources> -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -75,7 +84,7 @@
                         <id>attach-sources</id>
                         <phase>verify</phase>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>

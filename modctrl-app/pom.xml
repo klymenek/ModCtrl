@@ -202,11 +202,10 @@
                                     <fileset dir="${basedir}/../modctrl-api/src/main/resources/db" />
                                 </copy>
                                 <mkdir dir="${staging.dir}/ModbusControl/logs"/>
-                                <!-- 
+                                <!-- -->
                                 <copy todir="C:/ModbusControl">
                                     <fileset dir="${staging.dir}/ModbusControl" />
-                                </copy> 
-                                -->
+                                </copy>
                             </tasks>
                         </configuration>
                     </execution>

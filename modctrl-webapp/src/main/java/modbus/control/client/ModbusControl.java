@@ -64,7 +64,29 @@ public class ModbusControl implements EntryPoint {
     @Override
     public void onModuleLoad() {
         final ListBox select = new ListBox();
-        final Label errorLabel = new Label();
+
+//  Beispielcode:
+//        
+        final Label airportLabel = new Label();
+//        Airport ap = new Airport();
+//        ap.setCountry("Germany");
+//        ap.setId("FRA");
+//        
+//        airportService.save(ap, new SuccessCallback<Airport>() {
+//
+//            @Override
+//            public void onSuccess(Airport result) {
+//                airportLabel.setText(result.toString());
+//            }
+//        });
+//
+//        airportService.load("FRA", new SuccessCallback<Airport>() {
+//
+//            @Override
+//            public void onSuccess(Airport result) {
+//                airportLabel.setText(result.toString());
+//            }
+//        });
 
         select.setVisibleItemCount(1);
 
@@ -103,7 +125,7 @@ public class ModbusControl implements EntryPoint {
 
         // Add the Control Elements to the RootPanel
         // Use RootPanel.get() to get the entire body element
-        RootPanel.get("errorLabelContainer").add(errorLabel);
+        RootPanel.get("errorLabelContainer").add(airportLabel);
         RootPanel.get("selectContainer").add(select);
     }
 
