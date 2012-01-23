@@ -15,9 +15,14 @@ import modbus.control.client.rpc.DatabaseService;
 import modbus.control.client.rpc.DatabaseServiceAsync;
 import modbus.control.client.rpc.PLCService;
 import modbus.control.client.rpc.PLCServiceAsync;
+import org.krypsis.gwt.store.example.client.gin.AppGinjector;
+import org.krypsis.gwt.store.example.client.service.AirlineServiceAsync;
+import org.krypsis.gwt.store.example.client.service.AirplaneServiceAsync;
+import org.krypsis.gwt.store.example.client.service.AirportServiceAsync;
 
 /**
- * Entry point classes define <code>onModuleLoad()</code>.
+ * Entry point classes define
+ * <code>onModuleLoad()</code>.
  */
 public class ModbusControl implements EntryPoint {
 
@@ -32,14 +37,26 @@ public class ModbusControl implements EntryPoint {
     public static final String RPC_ERROR_TITLE = "Remote Procedure Call - Failure";
     public static final String MODBUS_ERROR_TITLE = "Modbus Error - Failure";
     /**
-     * Create a remote service proxy to talk to the server-side DigitalInOut service.
+     * Create a remote service proxy to talk to the server-side DigitalInOut
+     * service.
      */
     private final PLCServiceAsync plc = GWT.create(PLCService.class);
     /**
-     * Create a remote service proxy to talk to the server-side DigitalInOut service.
+     * Create a remote service proxy to talk to the server-side DigitalInOut
+     * service.
      */
     private final DatabaseServiceAsync database = GWT.create(DatabaseService.class);
     private List<Category> CategoryJsos = null;
+    private final AppGinjector ginjector = GWT.create(AppGinjector.class);
+    private final AirlineServiceAsync airlineService;
+    private final AirplaneServiceAsync airplaneService;
+    private final AirportServiceAsync airportService;
+
+    public ModbusControl() {
+        this.airlineService = ginjector.getAirlineService();
+        this.airplaneService = ginjector.getAirplaneService();
+        this.airportService = ginjector.getAirportService();
+    }
 
     /**
      * This is the entry point method.

@@ -14,6 +14,7 @@
 
     <!-- Other module inherits                                      -->
     <inherits name='modbus.control.api.Data' />
+    <inherits name='org.krypsis.gwt.store.example.Example' />
 
     <!-- Specify the app entry point class.                         -->
     <entry-point class='modbus.control.client.ModbusControl' />
